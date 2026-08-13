@@ -6,4 +6,4 @@ Este repositório segue o plano de implementação descrito em `docs/IMPLEMENTAT
 
 Fases de implementação, requisitos e decisões de arquitetura estão em `docs/`.
 
-Fase atual concluída: **FASE 08 — Primeiro Collector**. Consulte `docs/PHASE-08-FIRST-COLLECTOR.md`.
+Fase atual concluída: **FASE 10 — Histórico de Preços**. Consulte `docs/PHASE-10-PRICE-HISTORY.md`.

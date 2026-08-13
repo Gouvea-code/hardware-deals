@@ -15,3 +15,4 @@ CREATE TABLE products (
 
 CREATE INDEX idx_products_ean ON products(ean);
 CREATE INDEX idx_products_category ON products(category);
+CREATE INDEX idx_products_brand_normalized_name ON products(brand, normalized_name);

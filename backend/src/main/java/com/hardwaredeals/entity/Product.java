@@ -8,7 +8,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "products", indexes = {
     @Index(name = "idx_products_ean", columnList = "ean", unique = true),
-    @Index(name = "idx_products_category", columnList = "category")
+    @Index(name = "idx_products_category", columnList = "category"),
+    @Index(name = "idx_products_brand_normalized_name", columnList = "brand,normalized_name")
 })
 @Data
 @NoArgsConstructor

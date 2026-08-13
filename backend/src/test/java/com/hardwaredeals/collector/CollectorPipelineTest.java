@@ -51,6 +51,19 @@ class CollectorPipelineTest {
         assertThat(offers.count()).isZero();
     }
 
+    @Test
+    void matchesEquivalentNamesWithoutMergingDifferentVariants() {
+        CollectedOffer longName = named("a", "1000000000001", "ASRock Radeon RX 9070 XT Challenger 16GB");
+        CollectedOffer compact = named("b", "1000000000002", "ASRock RX9070XT Challenger 16 GB");
+        CollectedOffer differentVariant = named("c", "1000000000003", "ASRock RX 9070 Challenger 16GB");
+
+        assertThat(pipeline.run(collector(List.of(longName, compact, differentVariant))))
+                .isEqualTo(new CollectionResult(3, 3, 0));
+        assertThat(products.count()).isEqualTo(2);
+        assertThat(offers.count()).isEqualTo(3);
+        assertThat(history.count()).isEqualTo(3);
+    }
+
     private PriceCollector collector(List<CollectedOffer> values) {
         return new PriceCollector() {
             public String sourceName() { return "test-source"; }
@@ -62,5 +75,11 @@ class CollectorPipelineTest {
         return new CollectedOffer("source-store", externalId, "sku-" + externalId, "  GPU " + externalId + "  ",
                 "Brand", "Model", "GPU", ean, "https://store.example/" + externalId,
                 new BigDecimal(price), null, null, true, null);
+    }
+
+    private CollectedOffer named(String externalId, String ean, String name) {
+        return new CollectedOffer("source-store", externalId, "sku-" + externalId, name,
+                "ASRock", "RX 9070", "GPU", ean, "https://store.example/" + externalId,
+                new BigDecimal("3999.90"), null, null, true, null);
     }
 }

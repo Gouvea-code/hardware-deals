@@ -11,6 +11,8 @@ import java.util.UUID;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID>, JpaSpecificationExecutor<Product> {
     Optional<Product> findByEan(String ean);
+    Optional<Product> findByBrandIgnoreCaseAndNormalizedName(String brand, String normalizedName);
+    boolean existsByIdAndActiveTrue(UUID id);
     List<Product> findByCategory(String category);
     List<Product> findByNameContainingIgnoreCase(String name);
 }

@@ -9,6 +9,7 @@ import java.util.UUID;
 @Repository
 public interface PriceHistoryRepository extends JpaRepository<PriceHistory, UUID> {
     List<PriceHistory> findByProductIdOrderByCollectedAtDesc(UUID productId);
+    List<PriceHistory> findByProductIdOrderByCollectedAtAsc(UUID productId);
     List<PriceHistory> findByStoreIdOrderByCollectedAtDesc(UUID storeId);
     List<PriceHistory> findByProductIdAndStoreIdOrderByCollectedAtDesc(UUID productId, UUID storeId);
 }

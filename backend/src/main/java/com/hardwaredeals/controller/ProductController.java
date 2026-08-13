@@ -2,6 +2,8 @@ package com.hardwaredeals.controller;
 
 import com.hardwaredeals.dto.ProductDtos.*;
 import com.hardwaredeals.service.ProductService;
+import com.hardwaredeals.service.PriceHistoryService;
+import com.hardwaredeals.dto.PriceHistoryDtos.PriceHistoryResponse;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -10,7 +12,10 @@ import java.util.UUID;
 @RequestMapping("/api/v1/products")
 public class ProductController {
     private final ProductService products;
-    public ProductController(ProductService products) { this.products = products; }
+    private final PriceHistoryService priceHistory;
+    public ProductController(ProductService products, PriceHistoryService priceHistory) {
+        this.products = products; this.priceHistory = priceHistory;
+    }
 
     @GetMapping
     public PageResponse<ProductResponse> list(
@@ -23,6 +28,9 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductResponse get(@PathVariable UUID id) { return products.findById(id); }
+
+    @GetMapping("/{id}/price-history")
+    public PriceHistoryResponse history(@PathVariable UUID id) { return priceHistory.get(id); }
 
     @GetMapping("/search")
     public PageResponse<ProductResponse> search(
