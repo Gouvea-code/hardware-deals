@@ -31,6 +31,10 @@ public class User {
     @Builder.Default
     private String status = "ACTIVE";
 
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean emailVerified = false;
+
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Builder.Default

@@ -6,6 +6,9 @@ npm-debug.log
 .gradle/
 /build/
 /out/
+/backend/target/
+/backend/.m2/
+*.log
 
 # Android
 .idea/
