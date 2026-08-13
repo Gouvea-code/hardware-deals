@@ -1,0 +1,15 @@
+package com.hardwaredeals.repository;
+
+import com.hardwaredeals.entity.PriceAlert;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@Repository
+public interface PriceAlertRepository extends JpaRepository<PriceAlert, UUID> {
+    List<PriceAlert> findByUserId(UUID userId);
+    List<PriceAlert> findByUserIdAndActiveTrue(UUID userId);
+    Optional<PriceAlert> findByUserIdAndProductId(UUID userId, UUID productId);
+}

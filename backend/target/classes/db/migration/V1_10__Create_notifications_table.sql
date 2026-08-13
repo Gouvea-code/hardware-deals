@@ -1,0 +1,14 @@
+-- V1.10 Create notifications table
+CREATE TABLE notifications (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    read BOOLEAN NOT NULL DEFAULT false,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_notifications_user FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE INDEX idx_user_id ON notifications(user_id);
+CREATE INDEX idx_created_at ON notifications(created_at);
