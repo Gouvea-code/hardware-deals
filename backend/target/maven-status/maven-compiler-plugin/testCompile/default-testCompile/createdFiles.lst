@@ -1,2 +1,4 @@
+com\hardwaredeals\integration\FlywayMigrationTest.class
 com\hardwaredeals\controller\HealthControllerTest.class
 com\hardwaredeals\HardwareDealsApplicationTests.class
+com\hardwaredeals\integration\PostgreSQLIntegrationTest.class
