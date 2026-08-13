@@ -31,6 +31,7 @@ public class SecurityConfig {
                                 "/api/v1/auth/reset-password", "/api/v1/auth/verify-email").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/products", "/api/v1/products/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/stores", "/api/v1/stores/**").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/deals", "/api/v1/deals/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)

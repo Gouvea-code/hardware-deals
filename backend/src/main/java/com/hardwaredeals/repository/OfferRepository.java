@@ -9,4 +9,6 @@ import java.util.UUID;
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, UUID> {
     List<Offer> findByStoreProductId(UUID storeProductId);
+    List<Offer> findAllByOrderByCollectedAtDesc();
+    List<Offer> findByStoreProductProductIdOrderByCollectedAtDesc(UUID productId);
 }

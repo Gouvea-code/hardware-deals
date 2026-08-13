@@ -6,4 +6,4 @@ Este repositório segue o plano de implementação descrito em `docs/IMPLEMENTAT
 
 Fases de implementação, requisitos e decisões de arquitetura estão em `docs/`.
 
-Fase atual concluída: **FASE 10 — Histórico de Preços**. Consulte `docs/PHASE-10-PRICE-HISTORY.md`.
+Fase atual concluída: **FASE 12 — API de Ofertas**. Consulte `docs/PHASE-12-DEALS-API.md`.
