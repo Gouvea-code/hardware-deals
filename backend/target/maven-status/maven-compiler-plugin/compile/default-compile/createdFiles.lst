@@ -1,0 +1,4 @@
+com\hardwaredeals\HardwareDealsApplication.class
+com\hardwaredeals\config\GlobalExceptionHandler.class
+com\hardwaredeals\config\SecurityConfig.class
+com\hardwaredeals\controller\HealthController.class
