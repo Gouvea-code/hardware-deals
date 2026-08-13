@@ -1,0 +1,22 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Java/Gradle
+.gradle/
+/build/
+/out/
+
+# Android
+.idea/
+.vscode/
+/local.properties
+
+# Docker
+docker-compose.override.yml
+
+# OS
+.DS_Store
+
+# Env
+.env
