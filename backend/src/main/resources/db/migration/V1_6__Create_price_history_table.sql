@@ -9,6 +9,6 @@ CREATE TABLE price_history (
     CONSTRAINT fk_price_history_store FOREIGN KEY (store_id) REFERENCES stores(id)
 );
 
-CREATE INDEX idx_product_id ON price_history(product_id);
-CREATE INDEX idx_store_id ON price_history(store_id);
-CREATE INDEX idx_collected_at ON price_history(collected_at);
+CREATE INDEX idx_price_history_product_id ON price_history(product_id);
+CREATE INDEX idx_price_history_store_id ON price_history(store_id);
+CREATE INDEX idx_price_history_collected_at ON price_history(collected_at);

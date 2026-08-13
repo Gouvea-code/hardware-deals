@@ -34,5 +34,4 @@ logging:
     com.hardwaredeals: INFO
 
 server:
-  ssl:
-    enabled: true
+  forward-headers-strategy: framework

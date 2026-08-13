@@ -13,5 +13,5 @@ CREATE TABLE store_products (
     CONSTRAINT unique_store_product UNIQUE (store_id, product_id)
 );
 
-CREATE INDEX idx_store_product_unique ON store_products(store_id, product_id);
-CREATE INDEX idx_external_id ON store_products(external_id);
+CREATE INDEX idx_store_products_store_product ON store_products(store_id, product_id);
+CREATE INDEX idx_store_products_external_id ON store_products(external_id);

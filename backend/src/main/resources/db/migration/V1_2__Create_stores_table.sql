@@ -9,4 +9,4 @@ CREATE TABLE stores (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_slug ON stores(slug);
+CREATE INDEX idx_stores_slug ON stores(slug);

@@ -7,8 +7,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "device_tokens", indexes = {
-    @Index(name = "idx_user_id", columnList = "user_id"),
-    @Index(name = "idx_token", columnList = "token", unique = true)
+    @Index(name = "idx_device_tokens_user_id", columnList = "user_id"),
+    @Index(name = "idx_device_tokens_token", columnList = "token", unique = true)
 })
 @Data
 @NoArgsConstructor

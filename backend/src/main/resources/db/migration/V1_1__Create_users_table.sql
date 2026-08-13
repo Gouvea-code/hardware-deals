@@ -9,4 +9,4 @@ CREATE TABLE users (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_email ON users(email);
+CREATE INDEX idx_users_email ON users(email);

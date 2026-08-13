@@ -5,7 +5,7 @@ CREATE TABLE products (
     brand VARCHAR(255) NOT NULL,
     model VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
-    ean VARCHAR(50) NOT NULL,
+    ean VARCHAR(50) NOT NULL UNIQUE,
     normalized_name VARCHAR(255) NOT NULL,
     image_url VARCHAR(500),
     active BOOLEAN NOT NULL DEFAULT true,
@@ -13,5 +13,5 @@ CREATE TABLE products (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_ean ON products(ean);
-CREATE INDEX idx_category ON products(category);
+CREATE INDEX idx_products_ean ON products(ean);
+CREATE INDEX idx_products_category ON products(category);

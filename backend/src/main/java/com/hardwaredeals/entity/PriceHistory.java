@@ -8,9 +8,9 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "price_history", indexes = {
-    @Index(name = "idx_product_id", columnList = "product_id"),
-    @Index(name = "idx_store_id", columnList = "store_id"),
-    @Index(name = "idx_collected_at", columnList = "collected_at")
+    @Index(name = "idx_price_history_product_id", columnList = "product_id"),
+    @Index(name = "idx_price_history_store_id", columnList = "store_id"),
+    @Index(name = "idx_price_history_collected_at", columnList = "collected_at")
 })
 @Data
 @NoArgsConstructor

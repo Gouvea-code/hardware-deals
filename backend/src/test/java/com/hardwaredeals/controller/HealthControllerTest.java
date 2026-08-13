@@ -25,4 +25,18 @@ class HealthControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("UP"));
     }
+
+    @Test
+    void actuatorHealthIsPublicWithoutInternalDetails() throws Exception {
+        mockMvc.perform(get("/actuator/health"))
+                .andExpect(result -> org.junit.jupiter.api.Assertions.assertTrue(
+                        result.getResponse().getStatus() == 200 || result.getResponse().getStatus() == 503))
+                .andExpect(jsonPath("$.status").exists())
+                .andExpect(jsonPath("$.components").doesNotExist());
+    }
+
+    @Test
+    void otherActuatorEndpointsRequireAuthentication() throws Exception {
+        mockMvc.perform(get("/actuator/info")).andExpect(status().isForbidden());
+    }
 }

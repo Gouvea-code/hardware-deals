@@ -6,8 +6,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "store_products", indexes = {
-    @Index(name = "idx_store_product_unique", columnList = "store_id,product_id"),
-    @Index(name = "idx_external_id", columnList = "external_id")
+    @Index(name = "idx_store_products_store_product", columnList = "store_id,product_id"),
+    @Index(name = "idx_store_products_external_id", columnList = "external_id")
 })
 @Data
 @NoArgsConstructor

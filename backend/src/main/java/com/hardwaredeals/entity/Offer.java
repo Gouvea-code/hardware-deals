@@ -8,8 +8,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "offers", indexes = {
-    @Index(name = "idx_store_product_id", columnList = "store_product_id"),
-    @Index(name = "idx_collected_at", columnList = "collected_at")
+    @Index(name = "idx_offers_store_product_id", columnList = "store_product_id"),
+    @Index(name = "idx_offers_collected_at", columnList = "collected_at")
 })
 @Data
 @NoArgsConstructor

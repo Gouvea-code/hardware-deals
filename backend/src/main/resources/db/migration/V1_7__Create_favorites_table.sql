@@ -9,4 +9,4 @@ CREATE TABLE favorites (
     CONSTRAINT unique_user_product_favorite UNIQUE (user_id, product_id)
 );
 
-CREATE INDEX idx_user_product_unique ON favorites(user_id, product_id);
+CREATE INDEX idx_favorites_user_product ON favorites(user_id, product_id);

@@ -7,8 +7,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "products", indexes = {
-    @Index(name = "idx_ean", columnList = "ean"),
-    @Index(name = "idx_category", columnList = "category")
+    @Index(name = "idx_products_ean", columnList = "ean", unique = true),
+    @Index(name = "idx_products_category", columnList = "category")
 })
 @Data
 @NoArgsConstructor
@@ -31,7 +31,7 @@ public class Product {
     @Column(nullable = false)
     private String category;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String ean;
 
     @Column(nullable = false)

@@ -13,4 +13,4 @@ CREATE TABLE price_alerts (
     CONSTRAINT unique_user_product_alert UNIQUE (user_id, product_id)
 );
 
-CREATE INDEX idx_user_product_unique ON price_alerts(user_id, product_id);
+CREATE INDEX idx_price_alerts_user_product ON price_alerts(user_id, product_id);

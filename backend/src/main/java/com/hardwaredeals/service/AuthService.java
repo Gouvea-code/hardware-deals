@@ -77,6 +77,7 @@ public class AuthService {
         AuthToken token = requireUsable(request.token(), AuthTokenType.PASSWORD_RESET);
         token.getUser().setPasswordHash(passwords.encode(request.newPassword()));
         token.setUsedAt(LocalDateTime.now());
+        tokens.revokeActiveTokens(token.getUser().getId(), AuthTokenType.REFRESH, LocalDateTime.now());
         return new MessageResponse("Senha redefinida com sucesso");
     }
 

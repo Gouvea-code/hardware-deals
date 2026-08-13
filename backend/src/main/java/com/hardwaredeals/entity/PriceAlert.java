@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "price_alerts", indexes = {
-    @Index(name = "idx_user_product_unique", columnList = "user_id,product_id", unique = true)
+    @Index(name = "idx_price_alerts_user_product", columnList = "user_id,product_id", unique = true)
 })
 @Data
 @NoArgsConstructor

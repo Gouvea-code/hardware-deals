@@ -12,6 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.concurrent.atomic.AtomicReference;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AuthControllerTest {
     @Autowired MockMvc mvc;
     @Autowired UserRepository users;
+    @Autowired PasswordEncoder passwordEncoder;
     @MockBean JavaMailSender mailSender;
 
     @Test
@@ -75,7 +77,11 @@ class AuthControllerTest {
     void forgotAndResetPasswordDoesNotRevealUnknownEmail() throws Exception {
         AtomicReference<SimpleMailMessage> sent = captureEmail();
         User user = users.save(User.builder().name("Grace").email("grace@example.com")
-                .passwordHash("unused").status("ACTIVE").emailVerified(true).build());
+                .passwordHash(passwordEncoder.encode("oldSafePass123")).status("ACTIVE").emailVerified(true).build());
+        String login = mvc.perform(post("/api/v1/auth/login").contentType("application/json")
+                        .content("{\"email\":\"grace@example.com\",\"password\":\"oldSafePass123\"}"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        String refresh = JsonPath.read(login, "$.refreshToken");
         mvc.perform(post("/api/v1/auth/forgot-password").contentType("application/json")
                         .content("{\"email\":\"unknown@example.com\"}"))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.message").exists());
@@ -86,6 +92,9 @@ class AuthControllerTest {
         mvc.perform(post("/api/v1/auth/reset-password").contentType("application/json")
                         .content("{\"token\":\"" + reset + "\",\"newPassword\":\"newSafePass456\"}"))
                 .andExpect(status().isOk());
+        mvc.perform(post("/api/v1/auth/refresh").contentType("application/json")
+                        .content("{\"refreshToken\":\"" + refresh + "\"}"))
+                .andExpect(status().isUnauthorized());
         mvc.perform(post("/api/v1/auth/reset-password").contentType("application/json")
                         .content("{\"token\":\"" + reset + "\",\"newPassword\":\"anotherPass789\"}"))
                 .andExpect(status().isUnauthorized());

@@ -10,5 +10,5 @@ CREATE TABLE device_tokens (
     CONSTRAINT fk_device_tokens_user FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE INDEX idx_user_id ON device_tokens(user_id);
-CREATE INDEX idx_token ON device_tokens(token);
+CREATE INDEX idx_device_tokens_user_id ON device_tokens(user_id);
+CREATE INDEX idx_device_tokens_token ON device_tokens(token);

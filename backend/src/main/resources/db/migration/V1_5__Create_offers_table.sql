@@ -10,5 +10,5 @@ CREATE TABLE offers (
     CONSTRAINT fk_offers_store_product FOREIGN KEY (store_product_id) REFERENCES store_products(id)
 );
 
-CREATE INDEX idx_store_product_id ON offers(store_product_id);
-CREATE INDEX idx_collected_at ON offers(collected_at);
+CREATE INDEX idx_offers_store_product_id ON offers(store_product_id);
+CREATE INDEX idx_offers_collected_at ON offers(collected_at);
