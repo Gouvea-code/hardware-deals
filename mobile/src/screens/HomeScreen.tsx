@@ -1,10 +1,12 @@
 import {
   ActivityIndicator,
+  Pressable,
   RefreshControl,
   ScrollView,
   StyleSheet,
   View,
 } from 'react-native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import {
   AppButton,
@@ -15,9 +17,12 @@ import {
   SectionHeader,
 } from '../components';
 import {useHomeData} from '../hooks/useHomeData';
+import {RootStackParamList} from '../navigation/types';
 import {colors, spacing, typography} from '../theme';
 
-export function HomeScreen() {
+type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+export function HomeScreen({navigation}: HomeScreenProps) {
   const {
     bestDeals,
     categories,
@@ -68,6 +73,14 @@ export function HomeScreen() {
           <AppText style={styles.eyebrow}>ECONOMIZE NO SEU SETUP</AppText>
           <AppText style={styles.heroTitle}>As melhores ofertas de hardware</AppText>
         </View>
+
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => navigation.navigate('Search')}
+          style={({pressed}) => [styles.search, pressed && styles.searchPressed]}>
+          <AppText style={styles.searchPlaceholder}>Buscar produtos...</AppText>
+          <AppText style={styles.searchAction}>Buscar</AppText>
+        </Pressable>
 
         <View style={styles.section}>
           <SectionHeader title="Melhores ofertas" />
@@ -151,6 +164,27 @@ const styles = StyleSheet.create({
   },
   recentList: {
     gap: spacing.md,
+  },
+  search: {
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
+    borderRadius: 12,
+    borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: spacing.lg,
+    padding: spacing.md,
+  },
+  searchAction: {
+    color: colors.primary,
+    fontWeight: typography.weights.bold,
+  },
+  searchPlaceholder: {
+    color: colors.textMuted,
+  },
+  searchPressed: {
+    opacity: 0.7,
   },
   section: {
     marginTop: spacing.xl,

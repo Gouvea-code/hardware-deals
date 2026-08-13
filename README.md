@@ -6,4 +6,4 @@ Este repositório segue o plano de implementação descrito em `docs/IMPLEMENTAT
 
 Fases de implementação, requisitos e decisões de arquitetura estão em `docs/`.
 
-Fase atual concluída: **FASE 14 — Tela Home**. Consulte `docs/PHASE-14-HOME.md`.
+Fase atual concluída: **FASE 15 — Busca**. Consulte `docs/PHASE-15-SEARCH.md`.

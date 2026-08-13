@@ -2,6 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {HomeScreen} from '../screens/HomeScreen';
+import {SearchScreen} from '../screens/SearchScreen';
 import {colors} from '../theme';
 import {RootStackParamList} from './types';
 
@@ -21,6 +22,11 @@ export function RootNavigator() {
           component={HomeScreen}
           name="Home"
           options={{title: 'Hardware Deals'}}
+        />
+        <Stack.Screen
+          component={SearchScreen}
+          name="Search"
+          options={{title: 'Buscar produtos'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
