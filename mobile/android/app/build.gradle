@@ -4,6 +4,7 @@ apply plugin: "com.facebook.react"
 
 project.ext.envConfigFiles = [
     debug: ".env.development",
+    beta: ".env.beta",
     release: ".env.production"
 ]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -89,7 +90,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     signingConfigs {
         debug {
@@ -98,15 +99,32 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        if (project.hasProperty('HD_UPLOAD_STORE_FILE')) {
+            upload {
+                storeFile file(HD_UPLOAD_STORE_FILE)
+                storePassword HD_UPLOAD_STORE_PASSWORD
+                keyAlias HD_UPLOAD_KEY_ALIAS
+                keyPassword HD_UPLOAD_KEY_PASSWORD
+            }
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+        beta {
+            initWith release
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+            matchingFallbacks = ['release']
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            if (project.hasProperty('HD_UPLOAD_STORE_FILE')) {
+                signingConfig signingConfigs.upload
+            }
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
