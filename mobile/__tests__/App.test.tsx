@@ -12,6 +12,9 @@ jest.mock('../src/navigation/RootNavigator', () => ({
 jest.mock('../src/components/PushRegistration', () => ({
   PushRegistration: () => null,
 }));
+jest.mock('../src/components/SessionBootstrap', () => ({
+  SessionBootstrap: ({children}: {children: React.ReactNode}) => children,
+}));
 
 test('renders correctly', async () => {
   await ReactTestRenderer.act(() => {

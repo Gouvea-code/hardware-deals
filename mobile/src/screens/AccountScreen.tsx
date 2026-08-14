@@ -1,0 +1,9 @@
+import {useState} from 'react';import {NativeStackScreenProps} from '@react-navigation/native-stack';import {StyleSheet,View} from 'react-native';import {AppButton,AppText,Screen} from '../components';
+import {RootStackParamList} from '../navigation/types';import {logout} from '../services/authService';import {deactivateDevice} from '../services/deviceService';import {clearPushToken,loadPushToken} from '../services/pushTokenStorage';import {useSessionStore} from '../store/sessionStore';import {spacing,typography} from '../theme';
+type Props=NativeStackScreenProps<RootStackParamList,'Account'>;
+export function AccountScreen({navigation}:Props){const accessToken=useSessionStore(s=>s.accessToken);const refreshToken=useSessionStore(s=>s.refreshToken);const clear=useSessionStore(s=>s.clearSession);const[loading,setLoading]=useState(false);
+ if(!accessToken)return <Screen><View style={styles.center}><AppText style={styles.title}>Sua conta</AppText><AppText>Entre para sincronizar favoritos, alertas e notificações.</AppText><AppButton label="Entrar" onPress={()=>navigation.navigate('Login')}/></View></Screen>;
+ const signOut=async()=>{setLoading(true);try{const pushToken=await loadPushToken();if(pushToken)await deactivateDevice(pushToken);if(refreshToken)await logout(refreshToken);}finally{await clearPushToken();await clear();setLoading(false);navigation.popToTop();}};
+ return <Screen><View style={styles.center}><AppText style={styles.title}>Conta conectada</AppText><AppText>Favoritos, alertas e notificações estão sincronizados.</AppText><AppButton disabled={loading} label={loading?'Saindo...':'Sair'} onPress={signOut}/></View></Screen>;
+}
+const styles=StyleSheet.create({center:{alignItems:'center',flex:1,gap:spacing.md,justifyContent:'center'},title:{fontSize:24,fontWeight:typography.weights.bold}});

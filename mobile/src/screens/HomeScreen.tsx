@@ -92,6 +92,10 @@ export function HomeScreen({navigation}: HomeScreenProps) {
           style={({pressed}) => [styles.favoritesLink, pressed && styles.searchPressed]}>
           <AppText style={styles.searchAction}>Ver alertas</AppText>
         </Pressable>
+        <Pressable accessibilityRole="button" onPress={() => navigation.navigate('Account')}
+          style={({pressed}) => [styles.favoritesLink, pressed && styles.searchPressed]}>
+          <AppText style={styles.searchAction}>Minha conta</AppText>
+        </Pressable>
 
         <View style={styles.section}>
           <SectionHeader title="Melhores ofertas" />

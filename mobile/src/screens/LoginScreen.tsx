@@ -1,0 +1,11 @@
+import {useState} from 'react';import {NativeStackScreenProps} from '@react-navigation/native-stack';import {StyleSheet,TextInput,View} from 'react-native';
+import {AppButton,AppText,Screen} from '../components';import {RootStackParamList} from '../navigation/types';import {login} from '../services/authService';import {useSessionStore} from '../store/sessionStore';import {colors,spacing,typography} from '../theme';import {apiErrorMessage} from '../utils/apiErrorMessage';
+type Props=NativeStackScreenProps<RootStackParamList,'Login'>;
+export function LoginScreen({navigation}:Props){const[email,setEmail]=useState('');const[password,setPassword]=useState('');const[error,setError]=useState<string|null>(null);const[loading,setLoading]=useState(false);const setSession=useSessionStore(s=>s.setSession);
+ const submit=async()=>{setLoading(true);setError(null);try{await setSession(await login(email.trim(),password));navigation.popToTop();}catch(e){setError(apiErrorMessage(e,'Não foi possível entrar.'));}finally{setLoading(false);}};
+ return <Screen><View style={styles.form}><AppText style={styles.title}>Entrar</AppText><Field label="E-mail" value={email} onChange={setEmail}/><Field label="Senha" value={password} onChange={setPassword} secure/>
+ {error?<AppText style={styles.error}>{error}</AppText>:null}<AppButton disabled={loading||!email||!password} label={loading?'Entrando...':'Entrar'} onPress={submit}/>
+ <AppButton label="Criar conta" onPress={()=>navigation.navigate('Register')}/><AppButton label="Esqueci a senha" onPress={()=>navigation.navigate('ForgotPassword')}/></View></Screen>;
+}
+export function Field({label,onChange,secure,value}:{label:string;onChange:(v:string)=>void;secure?:boolean;value:string}){return <View style={styles.field}><AppText style={styles.label}>{label}</AppText><TextInput accessibilityLabel={label} autoCapitalize="none" onChangeText={onChange} secureTextEntry={secure} style={styles.input} value={value}/></View>}
+const styles=StyleSheet.create({error:{color:colors.danger},field:{gap:spacing.xs},form:{gap:spacing.md},input:{backgroundColor:colors.surface,borderColor:colors.border,borderRadius:12,borderWidth:1,color:colors.text,padding:spacing.md},label:{fontWeight:typography.weights.bold},title:{fontSize:28,fontWeight:typography.weights.bold,marginBottom:spacing.md}});
