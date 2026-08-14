@@ -1,12 +1,12 @@
 # O que falta para finalizar o Hardware Deals
 
-Atualizado após a FASE 25. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
+Atualizado após a FASE 26. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
 
 ## 1. Próxima fase recomendada
 
-### FASE 26 — Testes negativos
+### FASE 27 — Segurança
 
-Cobrir sistematicamente dados inválidos, tokens expirados, recursos inexistentes, preços inválidos e acesso sem autorização. A FASE 25 já cobre os principais fluxos positivos.
+Executar o checklist de segurança, priorizando rate limiting distribuído, headers, gestão de segredos, autorização e análise automatizada de dependências.
 
 ## 2. Produto e operação ainda pendentes
 
@@ -129,8 +129,8 @@ Essas fases são evolução e não devem preceder segurança, testes, collectors
 
 ## 8. Ordem prática recomendada
 
-1. FASE 26.
-2. FASE 25–28, ativando Docker e eliminando riscos encontrados.
+1. FASE 27.
+2. FASES 27 e 28, ativando o Docker local e eliminando riscos encontrados.
 3. Credenciais e connectors da FASE 47 em paralelo ao staging.
 4. FASE 30–35 com validação Firebase física.
 5. FASE 36–45 para publicação.
