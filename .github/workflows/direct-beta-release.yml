@@ -1,0 +1,28 @@
+name: Direct beta release
+on:
+  push:
+    tags: [direct-beta-*]
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Download verified APK artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 31808475507 --name android-debug-apk --dir dist
+      - name: Prepare checksum
+        run: |
+          mv dist/app-debug.apk dist/hardware-deals-beta-local.apk
+          sha256sum dist/hardware-deals-beta-local.apk | tee dist/SHA256SUMS.txt
+      - name: Publish prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            dist/hardware-deals-beta-local.apk dist/SHA256SUMS.txt \
+            --prerelease --title "Hardware Deals 1.0.0 beta local" \
+            --notes "Beta técnica para emulador Android com a API rodando no computador. Não é a beta pública para celulares reais. Confira SHA256SUMS.txt antes de instalar."
