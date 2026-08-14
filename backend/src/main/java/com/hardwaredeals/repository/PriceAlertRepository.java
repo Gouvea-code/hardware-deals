@@ -11,5 +11,6 @@ import java.util.UUID;
 public interface PriceAlertRepository extends JpaRepository<PriceAlert, UUID> {
     List<PriceAlert> findByUserId(UUID userId);
     List<PriceAlert> findByUserIdAndActiveTrue(UUID userId);
+    List<PriceAlert> findAllByActiveTrue();
     Optional<PriceAlert> findByUserIdAndProductId(UUID userId, UUID productId);
 }

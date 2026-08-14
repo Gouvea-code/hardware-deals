@@ -67,3 +67,9 @@ app:
     enabled: ${COLLECTOR_ENABLED:false}
     feed-url: ${COLLECTOR_FEED_URL:}
     cron: ${COLLECTOR_CRON:0 0 * * * *}
+  firebase:
+    enabled: ${FIREBASE_ENABLED:false}
+  alert-engine:
+    enabled: ${ALERT_ENGINE_ENABLED:false}
+    cron: ${ALERT_ENGINE_CRON:0 */15 * * * *}
+    cooldown: ${ALERT_NOTIFICATION_COOLDOWN:PT24H}

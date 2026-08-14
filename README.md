@@ -6,4 +6,4 @@ Este repositório segue o plano de implementação descrito em `docs/IMPLEMENTAT
 
 Fases de implementação, requisitos e decisões de arquitetura estão em `docs/`.
 
-Fase atual concluída: **FASE 20 — Firebase Push**. Consulte `docs/PHASE-20-FIREBASE-PUSH.md`.
+Fase atual concluída: **FASE 21 — Alert Engine**. Consulte `docs/PHASE-21-ALERT-ENGINE.md`.
