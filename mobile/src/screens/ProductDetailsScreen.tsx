@@ -1,7 +1,7 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ActivityIndicator, Image, ScrollView, StyleSheet, View} from 'react-native';
 
-import {AppButton, AppText, Screen, SectionHeader} from '../components';
+import {AppButton, AppText, PriceHistoryChart, Screen, SectionHeader} from '../components';
 import {useProductDetails} from '../hooks/useProductDetails';
 import {RootStackParamList} from '../navigation/types';
 import {colors, spacing, typography} from '../theme';
@@ -87,6 +87,11 @@ export function ProductDetailsScreen({route}: Props) {
           ) : (
             <AppText style={styles.muted}>Nenhuma loja disponível agora.</AppText>
           )}
+        </View>
+
+        <View style={styles.section}>
+          <SectionHeader title="Histórico de preços" />
+          <PriceHistoryChart history={priceHistory?.history ?? []} />
         </View>
 
         <View style={styles.section}>
