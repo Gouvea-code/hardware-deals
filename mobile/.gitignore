@@ -38,6 +38,8 @@ local.properties
 # node.js
 #
 node_modules/
+android/app/google-services.json
+ios/GoogleService-Info.plist
 npm-debug.log
 yarn-error.log
 
