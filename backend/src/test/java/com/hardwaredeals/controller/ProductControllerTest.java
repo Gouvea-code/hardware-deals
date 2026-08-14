@@ -22,12 +22,24 @@ class ProductControllerTest {
     @Autowired StoreRepository stores;
     @Autowired StoreProductRepository storeProducts;
     @Autowired OfferRepository offers;
+    @Autowired AnalyticsEventRepository analyticsEvents;
+    @Autowired OfferClickRepository offerClicks;
+    @Autowired NotificationRepository notifications;
+    @Autowired PriceAlertRepository alerts;
+    @Autowired FavoriteRepository favorites;
+    @Autowired PriceHistoryRepository history;
     private Product gpu;
     private Product monitor;
 
     @BeforeEach
     void setUp() {
+        analyticsEvents.deleteAll();
+        offerClicks.deleteAll();
+        notifications.deleteAll();
+        alerts.deleteAll();
+        favorites.deleteAll();
         offers.deleteAll();
+        history.deleteAll();
         storeProducts.deleteAll();
         products.deleteAll();
         stores.deleteAll();
