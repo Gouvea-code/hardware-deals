@@ -67,3 +67,13 @@ export type PriceHistory = {
   priceVariation: number | null;
   history: PricePoint[];
 };
+
+export type Favorite = {
+  id: string;
+  productId: string;
+  productName: string;
+  brand: string;
+  category: string;
+  imageUrl: string | null;
+  createdAt: string;
+};

@@ -82,6 +82,13 @@ export function HomeScreen({navigation}: HomeScreenProps) {
           <AppText style={styles.searchAction}>Buscar</AppText>
         </Pressable>
 
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => navigation.navigate('Favorites')}
+          style={({pressed}) => [styles.favoritesLink, pressed && styles.searchPressed]}>
+          <AppText style={styles.searchAction}>Ver favoritos</AppText>
+        </Pressable>
+
         <View style={styles.section}>
           <SectionHeader title="Melhores ofertas" />
           {bestDeals.length > 0 ? (
@@ -169,6 +176,10 @@ const styles = StyleSheet.create({
   feedback: {
     color: colors.textMuted,
     textAlign: 'center',
+  },
+  favoritesLink: {
+    alignSelf: 'flex-end',
+    marginTop: spacing.md,
   },
   heroTitle: {
     fontSize: 28,

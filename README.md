@@ -6,4 +6,4 @@ Este repositório segue o plano de implementação descrito em `docs/IMPLEMENTAT
 
 Fases de implementação, requisitos e decisões de arquitetura estão em `docs/`.
 
-Fase atual concluída: **FASE 17 — Histórico visual**. Consulte `docs/PHASE-17-VISUAL-HISTORY.md`.
+Fase atual concluída: **FASE 18 — Favoritos**. Consulte `docs/PHASE-18-FAVORITES.md`.

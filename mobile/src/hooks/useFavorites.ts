@@ -1,0 +1,15 @@
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+
+import {addFavorite, getFavorites, removeFavorite} from '../services/favoriteService';
+import {useSessionStore} from '../store/sessionStore';
+
+export function useFavorites() {
+  const accessToken = useSessionStore(state => state.accessToken);
+  const queryClient = useQueryClient();
+  const query = useQuery({enabled: Boolean(accessToken), queryFn: getFavorites, queryKey: ['favorites']});
+  const invalidate = () => queryClient.invalidateQueries({queryKey: ['favorites']});
+  const add = useMutation({mutationFn: addFavorite, onSuccess: invalidate});
+  const remove = useMutation({mutationFn: removeFavorite, onSuccess: invalidate});
+  return {...query, accessToken, add: add.mutateAsync, favorites: query.data ?? [],
+    isUpdating: add.isPending || remove.isPending, remove: remove.mutateAsync};
+}

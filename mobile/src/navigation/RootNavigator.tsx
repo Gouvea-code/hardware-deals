@@ -2,6 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {HomeScreen} from '../screens/HomeScreen';
+import {FavoritesScreen} from '../screens/FavoritesScreen';
 import {ProductDetailsScreen} from '../screens/ProductDetailsScreen';
 import {SearchScreen} from '../screens/SearchScreen';
 import {colors} from '../theme';
@@ -19,6 +20,11 @@ export function RootNavigator() {
           headerStyle: {backgroundColor: colors.surface},
           headerTintColor: colors.text,
         }}>
+        <Stack.Screen
+          component={FavoritesScreen}
+          name="Favorites"
+          options={{title: 'Favoritos'}}
+        />
         <Stack.Screen
           component={ProductDetailsScreen}
           name="ProductDetails"

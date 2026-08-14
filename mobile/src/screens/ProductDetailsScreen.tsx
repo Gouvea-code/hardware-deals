@@ -3,6 +3,7 @@ import {ActivityIndicator, Image, ScrollView, StyleSheet, View} from 'react-nati
 
 import {AppButton, AppText, PriceHistoryChart, Screen, SectionHeader} from '../components';
 import {useProductDetails} from '../hooks/useProductDetails';
+import {useFavorites} from '../hooks/useFavorites';
 import {RootStackParamList} from '../navigation/types';
 import {colors, spacing, typography} from '../theme';
 import {formatCurrency} from '../utils/formatCurrency';
@@ -12,6 +13,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 export function ProductDetailsScreen({route}: Props) {
   const {error, isLoading, offers, priceHistory, product, refresh} =
     useProductDetails(route.params.productId);
+  const favorites = useFavorites();
 
   if (isLoading) {
     return <Feedback loading title="Carregando detalhes..." />;
@@ -29,6 +31,7 @@ export function ProductDetailsScreen({route}: Props) {
 
   const bestOffer = offers[0];
   const currentPrice = priceHistory?.currentPrice ?? bestOffer?.price ?? null;
+  const isFavorite = favorites.favorites.some(item => item.productId === product.id);
 
   return (
     <Screen>
@@ -58,11 +61,17 @@ export function ProductDetailsScreen({route}: Props) {
         </View>
 
         <View style={styles.actions}>
-          <AppButton disabled label="Favoritar (em breve)" onPress={() => undefined} />
+          <AppButton
+            disabled={!favorites.accessToken || favorites.isUpdating}
+            label={!favorites.accessToken ? 'Entre para favoritar' : isFavorite ? 'Remover dos favoritos' : 'Favoritar'}
+            onPress={() => isFavorite ? favorites.remove(product.id) : favorites.add(product.id)}
+          />
           <AppButton disabled label="Criar alerta (em breve)" onPress={() => undefined} />
         </View>
         <AppText style={styles.helper}>
-          Favoritos e alertas serão sincronizados com sua conta nas próximas fases.
+          {!favorites.accessToken
+            ? 'A autenticação é necessária para sincronizar favoritos e alertas.'
+            : 'Seus favoritos são sincronizados com sua conta.'}
         </AppText>
 
         <View style={styles.section}>
