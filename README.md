@@ -2,7 +2,7 @@
 
 Aplicativo Android para encontrar ofertas de hardware, comparar preços históricos, salvar favoritos e receber alertas quando um produto atingir o preço desejado.
 
-Fase atual concluída: **FASE 27 — Segurança**.
+Fases atuais concluídas: **FASES 28 a 32 — Performance, CI e preparação operacional**.
 
 ## Tecnologias
 
@@ -204,6 +204,11 @@ Produção não deve utilizar os valores locais. Consulte `.env.production.examp
 - [FASE 25 — Testes completos](docs/PHASE-25-COMPLETE-TESTS.md)
 - [FASE 26 — Testes negativos](docs/PHASE-26-NEGATIVE-TESTS.md)
 - [FASE 27 — Segurança](docs/PHASE-27-SECURITY.md)
+- [FASE 28 — Performance](docs/PHASE-28-PERFORMANCE.md)
+- [FASE 29 — CI](docs/PHASE-29-CI.md)
+- [FASE 30 — Staging](docs/PHASE-30-STAGING.md)
+- [FASE 31 — Produção](docs/PHASE-31-PRODUCTION.md)
+- [FASE 32 — Domínio](docs/PHASE-32-DOMAIN.md)
 - [Cronograma de execução e publicação](docs/EXECUTION-ROADMAP.md)
 - [Trabalho restante](docs/PROJECT-REMAINING-WORK.md)
 - [Implantação e publicação](docs/DEPLOYMENT-AND-RELEASE.md)

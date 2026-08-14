@@ -1,4 +1,19 @@
 services:
+  proxy:
+    image: nginx:1.29-alpine
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./ops/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    secrets:
+      - tls-cert
+      - tls-key
+
   api:
     build:
       context: ./backend
@@ -57,10 +72,41 @@ services:
       timeout: 5s
       retries: 10
 
+  prometheus:
+    image: prom/prometheus:v3.7.3
+    restart: unless-stopped
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=15d"]
+    volumes:
+      - ./ops/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "127.0.0.1:19090:9090"
+
+  backup:
+    image: postgres:16-alpine
+    profiles: [maintenance]
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      BACKUP_DIR: /backups
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-30}
+    volumes:
+      - ./ops/scripts:/scripts:ro
+      - postgres_backups:/backups
+    entrypoint: ["/bin/sh", "/scripts/backup-postgres.sh"]
+
 volumes:
   postgres_data:
   redis_data:
+  prometheus_data:
+  postgres_backups:
 
 secrets:
   firebase-service-account:
     file: ${FIREBASE_SERVICE_ACCOUNT_FILE}
+  tls-cert:
+    file: ${TLS_CERT_FILE}
+  tls-key:
+    file: ${TLS_KEY_FILE}

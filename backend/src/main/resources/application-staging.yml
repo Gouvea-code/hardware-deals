@@ -1,0 +1,9 @@
+logging:
+  level:
+    root: INFO
+    com.hardwaredeals: INFO
+
+management:
+  endpoint:
+    health:
+      show-details: when_authorized

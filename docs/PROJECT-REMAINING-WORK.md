@@ -1,12 +1,12 @@
 # O que falta para finalizar o Hardware Deals
 
-Atualizado após a FASE 27. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
+Atualizado após a FASE 32. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
 
 ## 1. Próxima fase recomendada
 
-### FASE 28 — Performance
+### FASE 33 — Site público
 
-Medir latência da API, banco, collectors e push; revisar paginação, consultas, índices, cache e comportamento sob carga.
+Criar as páginas públicas de produto, privacidade, termos, suporte e exclusão de conta.
 
 ## 2. Produto e operação ainda pendentes
 
@@ -129,8 +129,8 @@ Essas fases são evolução e não devem preceder segurança, testes, collectors
 
 ## 8. Ordem prática recomendada
 
-1. FASE 28.
-2. Ativar o Docker local e eliminar os riscos encontrados nos testes de carga.
+1. FASE 33.
+2. Escolher provedor e domínio para materializar as FASES 30 a 32.
 3. Credenciais e connectors da FASE 47 em paralelo ao staging.
 4. FASE 30–35 com validação Firebase física.
 5. FASE 36–45 para publicação.

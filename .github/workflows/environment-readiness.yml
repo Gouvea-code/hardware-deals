@@ -1,0 +1,34 @@
+name: Environment readiness
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Environment to validate
+        required: true
+        type: choice
+        options: [staging, production]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.target }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Select configuration
+        id: config
+        run: |
+          if [ "${{ inputs.target }}" = staging ]; then
+            echo "file=docker-compose.staging.yml" >> "$GITHUB_OUTPUT"
+            echo "env=.env.staging.example" >> "$GITHUB_OUTPUT"
+          else
+            echo "file=docker-compose.production.yml" >> "$GITHUB_OUTPUT"
+            echo "env=.env.production.example" >> "$GITHUB_OUTPUT"
+          fi
+      - run: docker compose --env-file "${{ steps.config.outputs.env }}" -f "${{ steps.config.outputs.file }}" config --quiet
+      - run: docker compose --env-file "${{ steps.config.outputs.env }}" -f "${{ steps.config.outputs.file }}" build api
+      - name: Deployment boundary
+        run: echo "Configuration and image validated. Provider deployment requires environment secrets and an approved deployment adapter."
