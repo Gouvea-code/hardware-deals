@@ -1,0 +1,1 @@
+window.HARDWARE_DEALS_API_URL = '';

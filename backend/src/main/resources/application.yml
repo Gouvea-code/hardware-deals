@@ -78,6 +78,23 @@ app:
     enabled: ${COLLECTOR_ENABLED:false}
     feed-url: ${COLLECTOR_FEED_URL:}
     cron: ${COLLECTOR_CRON:0 0 * * * *}
+  marketplaces:
+    mercado-livre:
+      enabled: ${MERCADO_LIVRE_ENABLED:false}
+      api-url: ${MERCADO_LIVRE_API_URL:}
+      access-token: ${MERCADO_LIVRE_ACCESS_TOKEN:}
+    amazon-brasil:
+      enabled: ${AMAZON_BRASIL_ENABLED:false}
+      api-url: ${AMAZON_BRASIL_API_URL:}
+      access-token: ${AMAZON_BRASIL_ACCESS_TOKEN:}
+    kabum:
+      enabled: ${KABUM_ENABLED:false}
+      api-url: ${KABUM_API_URL:}
+      access-token: ${KABUM_ACCESS_TOKEN:}
+    magazine-luiza:
+      enabled: ${MAGAZINE_LUIZA_ENABLED:false}
+      api-url: ${MAGAZINE_LUIZA_API_URL:}
+      access-token: ${MAGAZINE_LUIZA_ACCESS_TOKEN:}
   firebase:
     enabled: ${FIREBASE_ENABLED:false}
   alert-engine:
