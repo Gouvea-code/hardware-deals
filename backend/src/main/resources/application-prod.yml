@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DB_URL}
+    url: ${DB_URL:jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
   
@@ -8,6 +8,9 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: false
+  data:
+    redis:
+      url: ${REDIS_URL:}
   
   flyway:
     enabled: true
@@ -46,6 +49,7 @@ logging:
     com.hardwaredeals: INFO
 
 server:
+  port: ${PORT:8080}
   forward-headers-strategy: framework
   error:
     include-message: never
