@@ -1,0 +1,9 @@
+services:
+  k6:
+    image: grafana/k6:0.57.0
+    environment:
+      BASE_URL: ${BASE_URL:-http://host.docker.internal:8080}
+      LOAD_PROFILE: ${LOAD_PROFILE:-100}
+    volumes:
+      - ./k6:/scripts:ro
+    command: run /scripts/api-load.js

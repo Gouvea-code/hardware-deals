@@ -21,6 +21,7 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - run: mvn --batch-mode -DskipTests compile
       - id: unit-tests
         continue-on-error: true
         run: mvn --batch-mode test
@@ -80,6 +81,11 @@ jobs:
       - run: cp .env.development.example .env.development
       - run: chmod +x android/gradlew
       - run: cd android && ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v6
+        with:
+          name: android-debug-apk
+          path: mobile/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
 
   dependency-review:
     if: github.event_name == 'pull_request'
@@ -105,3 +111,30 @@ jobs:
         working-directory: mobile
       - run: npm audit --audit-level=critical
         working-directory: mobile
+
+  performance-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker run --rm -v "$PWD/performance/k6:/scripts:ro" grafana/k6:0.57.0 inspect /scripts/api-load.js
+
+  release-candidate:
+    needs: [backend-unit, backend-integration, mobile, security-audit, performance-script]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - run: mvn --batch-mode -DskipTests package
+      - run: docker build -t hardware-deals:${{ github.sha }} .
+      - uses: actions/upload-artifact@v6
+        with:
+          name: backend-${{ github.sha }}
+          path: backend/target/*.jar
+          retention-days: 14
