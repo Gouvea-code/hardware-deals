@@ -207,7 +207,7 @@
                                 <exclude>none</exclude>
                             </excludes>
                             <includes>
-                                <include>**/*Test.java</include>
+                                <include>**/integration/**/*Test.java</include>
                             </includes>
                         </configuration>
                     </plugin>
