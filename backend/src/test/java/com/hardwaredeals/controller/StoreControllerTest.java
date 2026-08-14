@@ -20,7 +20,6 @@ class StoreControllerTest {
     @Autowired StoreRepository stores;
     @Autowired OfferRepository offers;
     @Autowired StoreProductRepository storeProducts;
-    @Autowired ProductRepository products;
     private Store active;
     private Store inactive;
 
@@ -28,7 +27,6 @@ class StoreControllerTest {
     void setUp() {
         offers.deleteAll();
         storeProducts.deleteAll();
-        products.deleteAll();
         stores.deleteAll();
         active = stores.save(store("Alpha Store", "alpha-store", true));
         stores.save(store("Beta Store", "beta-store", true));
