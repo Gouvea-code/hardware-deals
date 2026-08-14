@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {ActivityIndicator, Image, ScrollView, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Alert, Image, Linking, ScrollView, StyleSheet, View} from 'react-native';
 
 import {AppButton, AppText, PriceHistoryChart, Screen, SectionHeader} from '../components';
 import {useProductDetails} from '../hooks/useProductDetails';
@@ -7,6 +7,7 @@ import {useFavorites} from '../hooks/useFavorites';
 import {RootStackParamList} from '../navigation/types';
 import {colors, spacing, typography} from '../theme';
 import {formatCurrency} from '../utils/formatCurrency';
+import {registerOfferClick} from '../services/offerRedirectService';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
@@ -32,6 +33,15 @@ export function ProductDetailsScreen({navigation, route}: Props) {
   const bestOffer = offers[0];
   const currentPrice = priceHistory?.currentPrice ?? bestOffer?.price ?? null;
   const isFavorite = favorites.favorites.some(item => item.productId === product.id);
+  const openOffer = async (offerId: string) => {
+    try {
+      const {redirectUrl} = await registerOfferClick(offerId);
+      if (!(await Linking.canOpenURL(redirectUrl))) throw new Error('unsupported URL');
+      await Linking.openURL(redirectUrl);
+    } catch {
+      Alert.alert('Não foi possível abrir a oferta', 'Tente novamente em alguns instantes.');
+    }
+  };
 
   return (
     <Screen>
@@ -91,6 +101,7 @@ export function ProductDetailsScreen({navigation, route}: Props) {
                   <View style={styles.right}>
                     <AppText style={styles.offerPrice}>{formatCurrency(offer.price)}</AppText>
                     <AppText style={styles.score}>Score {offer.score}</AppText>
+                    <AppButton label="Ver oferta" onPress={() => openOffer(offer.id)} />
                   </View>
                 </View>
               ))}

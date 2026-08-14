@@ -27,12 +27,13 @@ public class AuthService {
     private final FavoriteRepository favorites;
     private final PriceAlertRepository alerts;
     private final NotificationRepository notifications;
+    private final OfferClickRepository offerClicks;
     private final SecureRandom random = new SecureRandom();
 
     public AuthService(UserRepository users, AuthTokenRepository tokens, PasswordEncoder passwords,
                        JwtService jwt, EmailService emailService, DeviceTokenRepository deviceTokens,
                        FavoriteRepository favorites, PriceAlertRepository alerts,
-                       NotificationRepository notifications) {
+                       NotificationRepository notifications, OfferClickRepository offerClicks) {
         this.users = users;
         this.tokens = tokens;
         this.passwords = passwords;
@@ -42,6 +43,7 @@ public class AuthService {
         this.favorites = favorites;
         this.alerts = alerts;
         this.notifications = notifications;
+        this.offerClicks = offerClicks;
     }
 
     public MessageResponse register(RegisterRequest request) {
@@ -105,6 +107,7 @@ public class AuthService {
             throw unauthorized("Senha inválida");
         }
         notifications.deleteByUserId(userId);
+        offerClicks.deleteByUserId(userId);
         alerts.deleteByUserId(userId);
         favorites.deleteByUserId(userId);
         deviceTokens.deleteByUserId(userId);
