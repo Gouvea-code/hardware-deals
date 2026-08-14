@@ -1,0 +1,65 @@
+services:
+  api:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      JWT_SECRET: ${JWT_SECRET}
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT:-587}
+      MAIL_USER: ${MAIL_USER}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      MAIL_FROM: ${MAIL_FROM}
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/firebase-service-account
+      FIREBASE_ENABLED: ${FIREBASE_ENABLED:-true}
+      ALERT_ENGINE_ENABLED: ${ALERT_ENGINE_ENABLED:-true}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+    secrets:
+      - firebase-service-account
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
+  redis_data:
+
+secrets:
+  firebase-service-account:
+    file: ${FIREBASE_SERVICE_ACCOUNT_FILE}

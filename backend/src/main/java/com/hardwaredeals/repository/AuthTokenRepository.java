@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface AuthTokenRepository extends JpaRepository<AuthToken, UUID> {
+    void deleteByUserId(UUID userId);
     Optional<AuthToken> findByTokenHashAndType(String tokenHash, AuthTokenType type);
 
     @Modifying

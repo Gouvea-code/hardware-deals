@@ -113,6 +113,24 @@ class AuthControllerTest {
                 .andExpect(status().isConflict());
     }
 
+    @Test
+    void deletesAuthenticatedAccountAfterPasswordConfirmation() throws Exception {
+        User user = users.save(User.builder().name("Delete Me").email("delete@example.com")
+                .passwordHash(passwordEncoder.encode("safePass123")).status("ACTIVE").emailVerified(true).build());
+        String login = mvc.perform(post("/api/v1/auth/login").contentType("application/json")
+                        .content("{\"email\":\"delete@example.com\",\"password\":\"safePass123\"}"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        String access = JsonPath.read(login, "$.accessToken");
+
+        mvc.perform(delete("/api/v1/auth/me").header("Authorization", "Bearer " + access)
+                        .contentType("application/json").content("{\"password\":\"wrong\"}"))
+                .andExpect(status().isUnauthorized());
+        mvc.perform(delete("/api/v1/auth/me").header("Authorization", "Bearer " + access)
+                        .contentType("application/json").content("{\"password\":\"safePass123\"}"))
+                .andExpect(status().isOk());
+        assertThat(users.findById(user.getId())).isEmpty();
+    }
+
     private AtomicReference<SimpleMailMessage> captureEmail() {
         AtomicReference<SimpleMailMessage> sent = new AtomicReference<>();
         doAnswer(invocation -> { sent.set(invocation.getArgument(0)); return null; })

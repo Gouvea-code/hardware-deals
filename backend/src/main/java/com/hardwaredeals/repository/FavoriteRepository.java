@@ -12,4 +12,5 @@ public interface FavoriteRepository extends JpaRepository<Favorite, UUID> {
     List<Favorite> findByUserId(UUID userId);
     Optional<Favorite> findByUserIdAndProductId(UUID userId, UUID productId);
     boolean existsByUserIdAndProductId(UUID userId, UUID productId);
+    void deleteByUserId(UUID userId);
 }

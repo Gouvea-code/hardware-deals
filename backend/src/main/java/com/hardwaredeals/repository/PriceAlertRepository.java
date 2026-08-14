@@ -13,4 +13,5 @@ public interface PriceAlertRepository extends JpaRepository<PriceAlert, UUID> {
     List<PriceAlert> findByUserIdAndActiveTrue(UUID userId);
     List<PriceAlert> findAllByActiveTrue();
     Optional<PriceAlert> findByUserIdAndProductId(UUID userId, UUID productId);
+    void deleteByUserId(UUID userId);
 }

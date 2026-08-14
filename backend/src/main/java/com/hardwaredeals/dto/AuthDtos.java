@@ -16,6 +16,7 @@ public final class AuthDtos {
     public record ForgotPasswordRequest(@NotBlank @Email String email) {}
     public record ResetPasswordRequest(@NotBlank String token, @NotBlank @Size(min = 8, max = 72) String newPassword) {}
     public record VerifyEmailRequest(@NotBlank String token) {}
+    public record DeleteAccountRequest(@NotBlank String password) {}
     public record TokenResponse(String accessToken, String refreshToken, String tokenType, long expiresIn) {}
     public record MessageResponse(String message) {}
 }

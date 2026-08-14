@@ -25,4 +25,9 @@ public class AuthController {
     @PostMapping("/reset-password") public MessageResponse reset(@Valid @RequestBody ResetPasswordRequest r) { return auth.resetPassword(r); }
     @PostMapping("/verify-email") public MessageResponse verify(@Valid @RequestBody VerifyEmailRequest r) { return auth.verifyEmail(r.token()); }
     @GetMapping("/me") public Map<String, String> me(Authentication authentication) { return Map.of("userId", authentication.getName()); }
+    @DeleteMapping("/me")
+    public MessageResponse deleteAccount(Authentication authentication,
+                                         @Valid @RequestBody DeleteAccountRequest request) {
+        return auth.deleteAccount(java.util.UUID.fromString(authentication.getName()), request.password());
+    }
 }

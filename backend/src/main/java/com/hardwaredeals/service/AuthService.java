@@ -23,15 +23,25 @@ public class AuthService {
     private final PasswordEncoder passwords;
     private final JwtService jwt;
     private final EmailService emailService;
+    private final DeviceTokenRepository deviceTokens;
+    private final FavoriteRepository favorites;
+    private final PriceAlertRepository alerts;
+    private final NotificationRepository notifications;
     private final SecureRandom random = new SecureRandom();
 
     public AuthService(UserRepository users, AuthTokenRepository tokens, PasswordEncoder passwords,
-                       JwtService jwt, EmailService emailService) {
+                       JwtService jwt, EmailService emailService, DeviceTokenRepository deviceTokens,
+                       FavoriteRepository favorites, PriceAlertRepository alerts,
+                       NotificationRepository notifications) {
         this.users = users;
         this.tokens = tokens;
         this.passwords = passwords;
         this.jwt = jwt;
         this.emailService = emailService;
+        this.deviceTokens = deviceTokens;
+        this.favorites = favorites;
+        this.alerts = alerts;
+        this.notifications = notifications;
     }
 
     public MessageResponse register(RegisterRequest request) {
@@ -86,6 +96,21 @@ public class AuthService {
         token.getUser().setEmailVerified(true);
         token.setUsedAt(LocalDateTime.now());
         return new MessageResponse("E-mail verificado com sucesso");
+    }
+
+    public MessageResponse deleteAccount(java.util.UUID userId, String password) {
+        User user = users.findById(userId)
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+        if (!passwords.matches(password, user.getPasswordHash())) {
+            throw unauthorized("Senha inválida");
+        }
+        notifications.deleteByUserId(userId);
+        alerts.deleteByUserId(userId);
+        favorites.deleteByUserId(userId);
+        deviceTokens.deleteByUserId(userId);
+        tokens.deleteByUserId(userId);
+        users.delete(user);
+        return new MessageResponse("Conta e dados pessoais excluídos");
     }
 
     private TokenResponse tokenPair(User user) {
