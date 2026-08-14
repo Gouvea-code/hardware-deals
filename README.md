@@ -2,6 +2,9 @@
 
 Aplicativo Android para encontrar ofertas de hardware, comparar preços históricos, salvar favoritos e receber alertas quando um produto atingir o preço desejado.
 
+- [Site público](https://gouvea-code.github.io/hardware-deals/)
+- [Download da beta técnica](https://gouvea-code.github.io/hardware-deals/download/)
+
 Fases concluídas no repositório: **00 a 35 e 37 a 40**. A FASE 36 foi adiada porque a distribuição será direta, fora da Play Store.
 
 ## Tecnologias
