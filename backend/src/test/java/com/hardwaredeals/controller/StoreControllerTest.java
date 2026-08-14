@@ -19,6 +19,7 @@ class StoreControllerTest {
     @Autowired MockMvc mvc;
     @Autowired StoreRepository stores;
     @Autowired OfferRepository offers;
+    @Autowired PriceHistoryRepository history;
     @Autowired StoreProductRepository storeProducts;
     private Store active;
     private Store inactive;
@@ -26,6 +27,7 @@ class StoreControllerTest {
     @BeforeEach
     void setUp() {
         offers.deleteAll();
+        history.deleteAll();
         storeProducts.deleteAll();
         stores.deleteAll();
         active = stores.save(store("Alpha Store", "alpha-store", true));
