@@ -78,3 +78,5 @@ app:
   analytics:
     retention: ${ANALYTICS_RETENTION:P90D}
     cleanup-cron: ${ANALYTICS_CLEANUP_CRON:0 30 3 * * *}
+  admin:
+    bootstrap-email: ${APP_ADMIN_EMAIL:}

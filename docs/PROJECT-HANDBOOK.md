@@ -18,7 +18,7 @@ Fluxo principal:
 
 ## 2. Estado atual
 
-- Fases 00 a 23 implementadas.
+- Fases 00 a 24 implementadas.
 - Backend em Java 21, Spring Boot 3.5 e Maven.
 - Aplicativo Android em React Native 0.87, React 19 e TypeScript.
 - PostgreSQL para persistência, Redis preparado para cache/rate limit e Firebase Cloud Messaging para push.
@@ -90,6 +90,7 @@ hardware-deals/
 | `notifications` | histórico de notificações geradas |
 | `offer_clicks` | clique, oferta, produto, loja, usuário opcional e horário |
 | `analytics_events` | eventos mínimos, contexto tipado e retenção limitada |
+| `admin_audit` | trilha mínima de alterações administrativas |
 
 ## 6. Backend: fluxo e regras
 
@@ -112,6 +113,7 @@ Todas as rotas usam o prefixo `/api/v1`.
 - favoritos
 - alertas de preço
 - tokens de dispositivo
+- administração em `/admin/**`, exclusivamente para `ROLE_ADMIN`
 
 ### Coleta
 
@@ -251,3 +253,4 @@ Os testes de integração precisam do Docker ativo. Não declarar que foram vali
 - `MARKETPLACE-INTEGRATION-PLAN.md`: estratégia dos cinco marketplaces.
 - `PHASE-21-ALERT-ENGINE.md` e `PHASE-22-OFFER-REDIRECT.md`: últimas entregas funcionais.
 - `PHASE-23-PRIVACY-ANALYTICS.md`: eventos mínimos e regras de retenção.
+- `PHASE-24-ADMINISTRATION.md`: papéis, operações e auditoria administrativa.

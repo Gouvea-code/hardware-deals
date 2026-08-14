@@ -11,4 +11,6 @@ public interface OfferRepository extends JpaRepository<Offer, UUID> {
     List<Offer> findByStoreProductId(UUID storeProductId);
     List<Offer> findAllByOrderByCollectedAtDesc();
     List<Offer> findByStoreProductProductIdOrderByCollectedAtDesc(UUID productId);
+    List<Offer> findTop50ByOrderByCollectedAtDesc();
+    long countByAvailableTrue();
 }

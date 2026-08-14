@@ -1,20 +1,20 @@
 # O que falta para finalizar o Hardware Deals
 
-Atualizado após a FASE 23. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
+Atualizado após a FASE 24. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
 
 ## 1. Próxima fase recomendada
 
-### FASE 24 — Administração
+### FASE 25 — Testes completos
 
-Implementar papéis e autorização administrativa antes de criar qualquer dashboard ou endpoint de leitura de analytics. Começar por um papel `ADMIN`, auditoria das ações e operações somente leitura para saúde dos collectors, produtos, lojas, ofertas reportadas e métricas agregadas.
+Expandir a cobertura unitária, web, integração e mobile, priorizando services ainda sem teste isolado, autorização de proprietário, migrations PostgreSQL reais, navegação e fluxos completos.
 
 ## 2. Produto e operação ainda pendentes
 
-### FASE 24 — Administração detalhada
+### Administração — melhorias posteriores
 
-- Papéis e autorização administrativa.
-- Gestão segura de produtos, lojas, ofertas inválidas e usuários.
-- Auditoria das operações administrativas.
+- Criar interface web administrativa quando houver decisão de hospedagem.
+- Paginar listas administrativas e adicionar filtros.
+- Integrar reports de usuários quando a FASE 49 existir.
 
 ### FASES 25 e 26 — Testes completos e negativos
 
@@ -129,7 +129,7 @@ Essas fases são evolução e não devem preceder segurança, testes, collectors
 
 ## 8. Ordem prática recomendada
 
-1. FASE 24.
+1. FASE 25 e 26.
 2. FASE 25–28, ativando Docker e eliminando riscos encontrados.
 3. Credenciais e connectors da FASE 47 em paralelo ao staging.
 4. FASE 30–35 com validação Firebase física.

@@ -12,6 +12,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -32,7 +33,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 users.findById(UUID.fromString(jwt.getSubject(header.substring(7))))
                         .filter(u -> "ACTIVE".equals(u.getStatus()) && Boolean.TRUE.equals(u.getEmailVerified()))
                         .ifPresent(user -> SecurityContextHolder.getContext().setAuthentication(
-                                new UsernamePasswordAuthenticationToken(user.getId().toString(), null, List.of())));
+                                new UsernamePasswordAuthenticationToken(user.getId().toString(), null,
+                                        List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name())))));
             } catch (JwtException | IllegalArgumentException ignored) {
                 SecurityContextHolder.clearContext();
             }

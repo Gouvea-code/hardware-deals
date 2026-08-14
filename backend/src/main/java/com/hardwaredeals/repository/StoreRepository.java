@@ -13,4 +13,5 @@ public interface StoreRepository extends JpaRepository<Store, UUID> {
     Optional<Store> findBySlug(String slug);
     Optional<Store> findByIdAndActiveTrue(UUID id);
     List<Store> findAllByActiveTrue(Sort sort);
+    long countByActiveTrue();
 }
