@@ -73,3 +73,5 @@ app:
     enabled: ${ALERT_ENGINE_ENABLED:false}
     cron: ${ALERT_ENGINE_CRON:0 */15 * * * *}
     cooldown: ${ALERT_NOTIFICATION_COOLDOWN:PT24H}
+  security:
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:3000}

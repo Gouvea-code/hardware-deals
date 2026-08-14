@@ -31,6 +31,8 @@ app:
     enabled: ${FIREBASE_ENABLED:true}
   alert-engine:
     enabled: ${ALERT_ENGINE_ENABLED:true}
+  security:
+    allowed-origins: ${ALLOWED_ORIGINS}
 
 logging:
   level:
