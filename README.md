@@ -2,7 +2,7 @@
 
 Aplicativo Android para encontrar ofertas de hardware, comparar preços históricos, salvar favoritos e receber alertas quando um produto atingir o preço desejado.
 
-Fases atuais concluídas: **FASES 28 a 32 — Performance, CI e preparação operacional**.
+Fases concluídas no repositório: **00 a 35**. A **FASE 36 — Google Play Console** está preparada e aguarda ativação externa pelo proprietário.
 
 ## Tecnologias
 
@@ -209,6 +209,10 @@ Produção não deve utilizar os valores locais. Consulte `.env.production.examp
 - [FASE 30 — Staging](docs/PHASE-30-STAGING.md)
 - [FASE 31 — Produção](docs/PHASE-31-PRODUCTION.md)
 - [FASE 32 — Domínio](docs/PHASE-32-DOMAIN.md)
+- [FASE 33 — Site público](docs/PHASE-33-PUBLIC-SITE.md)
+- [FASE 34 — LGPD](docs/PHASE-34-LGPD.md)
+- [FASE 35 — Política de privacidade](docs/PHASE-35-PRIVACY-POLICY.md)
+- [FASE 36 — Google Play Console](docs/PHASE-36-GOOGLE-PLAY-CONSOLE.md)
 - [Cronograma de execução e publicação](docs/EXECUTION-ROADMAP.md)
 - [Trabalho restante](docs/PROJECT-REMAINING-WORK.md)
 - [Implantação e publicação](docs/DEPLOYMENT-AND-RELEASE.md)

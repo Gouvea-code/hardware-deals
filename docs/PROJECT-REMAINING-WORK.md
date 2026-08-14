@@ -1,12 +1,12 @@
 # O que falta para finalizar o Hardware Deals
 
-Atualizado após a FASE 32. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
+Atualizado após a preparação da FASE 36. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
 
 ## 1. Próxima fase recomendada
 
-### FASE 33 — Site público
+### FASE 36 — Ativação externa da Play Console
 
-Criar as páginas públicas de produto, privacidade, termos, suporte e exclusão de conta.
+Escolher conta pessoal ou de organização, pagar a taxa, verificar identidade e registrar o publicador. Depois, iniciar a FASE 37 — Android Release.
 
 ## 2. Produto e operação ainda pendentes
 
@@ -129,8 +129,9 @@ Essas fases são evolução e não devem preceder segurança, testes, collectors
 
 ## 8. Ordem prática recomendada
 
-1. FASE 33.
-2. Escolher provedor e domínio para materializar as FASES 30 a 32.
+1. Ativar a conta da FASE 36.
+2. Seguir para a FASE 37 — Android Release.
+3. Escolher provedor e domínio para materializar as FASES 30 a 35.
 3. Credenciais e connectors da FASE 47 em paralelo ao staging.
 4. FASE 30–35 com validação Firebase física.
 5. FASE 36–45 para publicação.
