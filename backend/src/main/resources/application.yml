@@ -81,8 +81,9 @@ app:
   marketplaces:
     mercado-livre:
       enabled: ${MERCADO_LIVRE_ENABLED:false}
-      api-url: ${MERCADO_LIVRE_API_URL:}
+      api-url: ${MERCADO_LIVRE_API_URL:https://api.mercadolibre.com/sites/MLB/search}
       access-token: ${MERCADO_LIVRE_ACCESS_TOKEN:}
+      query: ${MERCADO_LIVRE_QUERY:hardware computador}
     amazon-brasil:
       enabled: ${AMAZON_BRASIL_ENABLED:false}
       api-url: ${AMAZON_BRASIL_API_URL:}

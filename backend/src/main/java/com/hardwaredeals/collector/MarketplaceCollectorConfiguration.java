@@ -28,6 +28,6 @@ public class MarketplaceCollectorConfiguration {
     @Bean("mercadoLivrePriceCollector")
     @ConditionalOnProperty(prefix="app.marketplaces.mercado-livre", name="enabled", havingValue="true")
     PriceCollector mercadoLivre(RestClient.Builder builder, MarketplaceProperties properties) {
-        return new MarketplaceFeedPriceCollector("mercado-livre", builder, properties.getMercadoLivre());
+        return new MercadoLivrePriceCollector(builder, properties.getMercadoLivre());
     }
 }

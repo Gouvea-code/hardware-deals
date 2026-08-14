@@ -2,7 +2,7 @@
 
 ## O que foi implementado
 
-O backend possui conectores independentes para Mercado Livre, Amazon Brasil, KaBuM! e Magazine Luiza. Todos recebem ofertas de uma API/feed autorizado no formato normalizado abaixo, passam pelo pipeline já existente e alimentam os mesmos endpoints consumidos pelo site e pelo APK.
+O backend possui conectores independentes para Mercado Livre, Amazon Brasil, KaBuM! e Magazine Luiza. O Mercado Livre usa diretamente a API oficial de busca do site `MLB`; os outros canais recebem uma API/feed parceiro no formato normalizado abaixo. Todos passam pelo pipeline existente e alimentam os mesmos endpoints consumidos pelo site e pelo APK.
 
 Nenhum conector faz scraping. Cada canal fica desabilitado até que o proprietário do projeto obtenha contrato, credencial e endpoint permitidos pelo marketplace ou parceiro afiliado.
 
@@ -38,7 +38,7 @@ Para executar a coleta, defina `COLLECTOR_ENABLED=true`. Para cada loja, defina:
 
 | Loja | Ativação | Endpoint | Token Bearer opcional |
 |---|---|---|---|
-| Mercado Livre | `MERCADO_LIVRE_ENABLED` | `MERCADO_LIVRE_API_URL` | `MERCADO_LIVRE_ACCESS_TOKEN` |
+| Mercado Livre | `MERCADO_LIVRE_ENABLED` | `MERCADO_LIVRE_API_URL` (opcional; API oficial por padrão) | `MERCADO_LIVRE_ACCESS_TOKEN` |
 | Amazon Brasil | `AMAZON_BRASIL_ENABLED` | `AMAZON_BRASIL_API_URL` | `AMAZON_BRASIL_ACCESS_TOKEN` |
 | KaBuM! | `KABUM_ENABLED` | `KABUM_API_URL` | `KABUM_ACCESS_TOKEN` |
 | Magazine Luiza | `MAGAZINE_LUIZA_ENABLED` | `MAGAZINE_LUIZA_API_URL` | `MAGAZINE_LUIZA_ACCESS_TOKEN` |
@@ -47,7 +47,7 @@ Tokens são enviados apenas no cabeçalho `Authorization: Bearer`, nunca em URL 
 
 ## Limite atual e ativação real
 
-- Mercado Livre: cadastrar uma aplicação e obter autorização para os recursos compatíveis com o modelo de negócio.
+- Mercado Livre: cadastrar uma URL de retorno, autorizar uma conta pelo OAuth e trocar o `authorization_code` por `access_token` e `refresh_token`. ID e chave do aplicativo, isoladamente, não autorizam consultas. O token de acesso entra em `MERCADO_LIVRE_ACCESS_TOKEN`; a consulta pode ser ajustada por `MERCADO_LIVRE_QUERY`. O refresh token é rotativo e precisa de armazenamento seguro antes da operação contínua.
 - Amazon Brasil: obter acesso ao programa/API vigente e colocar um adaptador autorizado na frente do formato normalizado.
 - KaBuM!: contratar feed/API ou programa de afiliados que permita catálogo e preço.
 - Magazine Luiza: obter credenciais das APIs/parceria comercial e adaptar a resposta ao contrato normalizado.
