@@ -7,6 +7,7 @@ import com.hardwaredeals.repository.ProductRepository;
 import com.hardwaredeals.repository.UserRepository;
 import com.hardwaredeals.service.JwtService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -49,6 +50,14 @@ class NegativeApiTest {
                 .name("Negative Test GPU").brand("Test").model("N1").category("GPU")
                 .ean(UUID.randomUUID().toString()).normalizedName("negative test gpu").active(true).build());
         jwt = new JwtService(TEST_SECRET, Duration.ofMinutes(15));
+    }
+
+    @AfterEach
+    void tearDown() {
+        alerts.findByUserIdAndProductId(owner.getId(), product.getId()).ifPresent(alerts::delete);
+        alerts.findByUserIdAndProductId(otherUser.getId(), product.getId()).ifPresent(alerts::delete);
+        products.deleteById(product.getId());
+        users.deleteAllById(java.util.List.of(owner.getId(), otherUser.getId()));
     }
 
     @Test
