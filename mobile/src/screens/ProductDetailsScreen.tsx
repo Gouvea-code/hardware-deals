@@ -1,4 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useEffect} from 'react';
 import {ActivityIndicator, Alert, Image, Linking, ScrollView, StyleSheet, View} from 'react-native';
 
 import {AppButton, AppText, PriceHistoryChart, Screen, SectionHeader} from '../components';
@@ -8,6 +9,7 @@ import {RootStackParamList} from '../navigation/types';
 import {colors, spacing, typography} from '../theme';
 import {formatCurrency} from '../utils/formatCurrency';
 import {registerOfferClick} from '../services/offerRedirectService';
+import {trackEventSafely} from '../services/analyticsService';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
@@ -15,6 +17,7 @@ export function ProductDetailsScreen({navigation, route}: Props) {
   const {error, isLoading, offers, priceHistory, product, refresh} =
     useProductDetails(route.params.productId);
   const favorites = useFavorites();
+  useEffect(()=>{trackEventSafely('PRODUCT_VIEW',{productId:route.params.productId});},[route.params.productId]);
 
   if (isLoading) {
     return <Feedback loading title="Carregando detalhes..." />;

@@ -1,4 +1,4 @@
-import {AuthorizationStatus,getMessaging,getToken,onTokenRefresh,requestPermission} from '@react-native-firebase/messaging';
+import {AuthorizationStatus,getInitialNotification,getMessaging,getToken,onNotificationOpenedApp,onTokenRefresh,requestPermission} from '@react-native-firebase/messaging';
 import {PermissionsAndroid,Platform} from 'react-native';
 
 export async function requestPushToken(){
@@ -11,3 +11,8 @@ export async function requestPushToken(){
  return getToken(messaging);
 }
 export function listenForPushTokenRefresh(listener:(token:string)=>unknown){return onTokenRefresh(getMessaging(),listener);}
+export function listenForNotificationOpen(listener:(notificationId:string)=>unknown){
+ const messaging=getMessaging();
+ getInitialNotification(messaging).then(message=>{const id=message?.data?.notificationId;if(typeof id==='string')listener(id);}).catch(()=>undefined);
+ return onNotificationOpenedApp(messaging,message=>{const id=message.data?.notificationId;if(typeof id==='string')listener(id);});
+}

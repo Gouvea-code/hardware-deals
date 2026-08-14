@@ -19,12 +19,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class OfferRedirectControllerTest {
     @Autowired MockMvc mvc;
     @Autowired OfferClickRepository clicks;
+    @Autowired AnalyticsEventRepository analyticsEvents;
     @Autowired OfferRepository offers;
     @Autowired StoreProductRepository storeProducts;
     @Autowired ProductRepository products;
     @Autowired StoreRepository stores;
 
-    @AfterEach void clean() { clicks.deleteAll(); }
+    @AfterEach void clean() { analyticsEvents.deleteAll(); clicks.deleteAll(); }
 
     @Test
     void recordsAnonymousClickAndReturnsTrustedDestination() throws Exception {
@@ -34,6 +35,7 @@ class OfferRedirectControllerTest {
                 .andExpect(jsonPath("$.clickId").isNotEmpty())
                 .andExpect(jsonPath("$.redirectUrl").value("https://shop.example/item/123"));
         assertThat(clicks.countByOfferId(offer.getId())).isEqualTo(1);
+        assertThat(analyticsEvents.countByEventType(AnalyticsEventType.OFFER_CLICK)).isEqualTo(1);
     }
 
     @Test

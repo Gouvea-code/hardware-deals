@@ -2,12 +2,13 @@ import {useState} from 'react'; import {NativeStackScreenProps} from '@react-nav
 import {StyleSheet,TextInput,View} from 'react-native'; import {AppButton,AppText,Screen} from '../components';
 import {useAlerts} from '../hooks/useAlerts'; import {RootStackParamList} from '../navigation/types'; import {colors,spacing,typography} from '../theme';
 import {formatCurrency} from '../utils/formatCurrency';
+import {trackEventSafely} from '../services/analyticsService';
 type Props=NativeStackScreenProps<RootStackParamList,'AlertForm'>;
 export function AlertFormScreen({navigation,route}:Props){
  const {productId,productName,currentPrice}=route.params; const [value,setValue]=useState(currentPrice?.toFixed(2)??'');
  const [error,setError]=useState<string|null>(null); const alerts=useAlerts();
  const submit=async()=>{const price=Number(value.replace(',','.')); if(!Number.isFinite(price)||price<=0){setError('Informe um preço maior que zero.');return;}
-  setError(null); try{await alerts.save({productId,targetPrice:price});navigation.goBack();}catch{setError('Não foi possível salvar o alerta.');}};
+  setError(null); try{await alerts.save({productId,targetPrice:price});await trackEventSafely('ALERT_CREATED',{productId});navigation.goBack();}catch{setError('Não foi possível salvar o alerta.');}};
  return <Screen><View style={styles.content}><AppText style={styles.title}>{productName}</AppText>
   {currentPrice?<AppText style={styles.muted}>Preço atual: {formatCurrency(currentPrice)}</AppText>:null}
   <AppText style={styles.label}>Avise quando o preço for menor ou igual a</AppText>

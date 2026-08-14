@@ -18,8 +18,9 @@ public class AlertEngineService {
   Optional<BigDecimal> current=latestAvailablePrices(alert.getProduct().getId()).stream().min(BigDecimal::compareTo);
   if(current.isEmpty()||current.get().compareTo(alert.getTargetPrice())>0)return;
   String title="Preço desejado encontrado";String body=alert.getProduct().getName()+" por "+current.get().setScale(2);
-  notifications.save(Notification.builder().user(alert.getUser()).type("PRICE_ALERT").title(title).message(body).build());
-  Map<String,String> data=Map.of("type","PRICE_ALERT","productId",alert.getProduct().getId().toString(),"alertId",alert.getId().toString());
+  Notification notification=notifications.save(Notification.builder().user(alert.getUser()).type("PRICE_ALERT").title(title).message(body).build());
+  Map<String,String> data=Map.of("type","PRICE_ALERT","productId",alert.getProduct().getId().toString(),
+   "alertId",alert.getId().toString(),"notificationId",notification.getId().toString());
   for(DeviceToken device:devices.findByUserIdAndActiveTrue(alert.getUser().getId())){DeliveryResult result=push.send(device.getToken(),title,body,data);
    if(result.invalidToken()){device.setActive(false);devices.save(device);}}
   alert.setLastNotifiedAt(now);alerts.save(alert);

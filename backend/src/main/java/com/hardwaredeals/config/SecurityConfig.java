@@ -37,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/stores", "/api/v1/stores/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/deals", "/api/v1/deals/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/v1/offers/*/click").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/v1/analytics/events").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)

@@ -17,9 +17,11 @@ public class OfferRedirectService {
     private final OfferRepository offers;
     private final OfferClickRepository clicks;
     private final UserRepository users;
+    private final AnalyticsService analytics;
 
-    public OfferRedirectService(OfferRepository offers, OfferClickRepository clicks, UserRepository users) {
-        this.offers = offers; this.clicks = clicks; this.users = users;
+    public OfferRedirectService(OfferRepository offers, OfferClickRepository clicks, UserRepository users,
+                                AnalyticsService analytics) {
+        this.offers = offers; this.clicks = clicks; this.users = users; this.analytics = analytics;
     }
 
     public OfferRedirectResponse register(UUID offerId, UUID userId) {
@@ -33,6 +35,7 @@ public class OfferRedirectService {
         LocalDateTime now = LocalDateTime.now();
         OfferClick click = clicks.save(OfferClick.builder().user(user).offer(offer)
                 .product(storeProduct.getProduct()).store(storeProduct.getStore()).clickedAt(now).build());
+        analytics.recordOfferClick(user, offer);
         return new OfferRedirectResponse(click.getId(), storeProduct.getUrl(), now);
     }
 

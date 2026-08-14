@@ -14,6 +14,7 @@ class AlertEngineServiceTest {
   StoreProduct link=StoreProduct.builder().id(UUID.randomUUID()).store(store).product(alert.getProduct()).active(true).build();
   Offer offer=Offer.builder().storeProduct(link).price(new BigDecimal("3600")).available(true).build();
   when(offers.findByStoreProductProductIdOrderByCollectedAtDesc(alert.getProduct().getId())).thenReturn(List.of(offer));
+  when(notifications.save(any(Notification.class))).thenAnswer(invocation->{Notification value=invocation.getArgument(0);value.setId(UUID.randomUUID());return value;});
   when(devices.findByUserIdAndActiveTrue(alert.getUser().getId())).thenReturn(List.of(device));when(push.send(any(),any(),any(),any())).thenReturn(DeliveryResult.invalid());
   engine.evaluate(alert,LocalDateTime.now());verify(notifications).save(any(Notification.class));verify(alerts).save(alert);verify(devices).save(device);
   Assertions.assertFalse(device.getActive());Assertions.assertNotNull(alert.getLastNotifiedAt());}

@@ -1,16 +1,16 @@
 # O que falta para finalizar o Hardware Deals
 
-Atualizado após a FASE 22. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
+Atualizado após a FASE 23. Este arquivo separa desenvolvimento, validação externa e evolução futura para evitar que preparação seja confundida com conclusão.
 
 ## 1. Próxima fase recomendada
 
-### FASE 23 — Analytics com privacidade
+### FASE 24 — Administração
 
-Implementar os eventos mínimos `app_open`, `search`, `product_view`, `favorite`, `alert_created`, `notification_open` e `offer_click`. Definir esquema, retenção, consentimento quando aplicável e consulta agregada. Não enviar e-mail, token, texto livre ou outro dado desnecessário. O `offer_click` já possui sua fonte transacional na FASE 22.
+Implementar papéis e autorização administrativa antes de criar qualquer dashboard ou endpoint de leitura de analytics. Começar por um papel `ADMIN`, auditoria das ações e operações somente leitura para saúde dos collectors, produtos, lojas, ofertas reportadas e métricas agregadas.
 
 ## 2. Produto e operação ainda pendentes
 
-### FASE 24 — Administração
+### FASE 24 — Administração detalhada
 
 - Papéis e autorização administrativa.
 - Gestão segura de produtos, lojas, ofertas inválidas e usuários.
@@ -129,7 +129,7 @@ Essas fases são evolução e não devem preceder segurança, testes, collectors
 
 ## 8. Ordem prática recomendada
 
-1. FASE 23 e 24.
+1. FASE 24.
 2. FASE 25–28, ativando Docker e eliminando riscos encontrados.
 3. Credenciais e connectors da FASE 47 em paralelo ao staging.
 4. FASE 30–35 com validação Firebase física.

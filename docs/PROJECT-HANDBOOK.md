@@ -18,7 +18,7 @@ Fluxo principal:
 
 ## 2. Estado atual
 
-- Fases 00 a 22 implementadas.
+- Fases 00 a 23 implementadas.
 - Backend em Java 21, Spring Boot 3.5 e Maven.
 - Aplicativo Android em React Native 0.87, React 19 e TypeScript.
 - PostgreSQL para persistência, Redis preparado para cache/rate limit e Firebase Cloud Messaging para push.
@@ -89,6 +89,7 @@ hardware-deals/
 | `device_tokens` | dispositivos FCM ativos |
 | `notifications` | histórico de notificações geradas |
 | `offer_clicks` | clique, oferta, produto, loja, usuário opcional e horário |
+| `analytics_events` | eventos mínimos, contexto tipado e retenção limitada |
 
 ## 6. Backend: fluxo e regras
 
@@ -102,6 +103,7 @@ Todas as rotas usam o prefixo `/api/v1`.
 - `GET /stores`, `/stores/{id}`
 - `GET /deals`, `/deals/{id}` e `/products/{id}/offers`
 - `POST /offers/{offerId}/click`
+- `POST /analytics/events`
 - `GET /health` e health checks do Actuator
 
 ### Rotas autenticadas principais
@@ -248,3 +250,4 @@ Os testes de integração precisam do Docker ativo. Não declarar que foram vali
 - `LGPD-AND-PRIVACY.md`: base técnica de privacidade.
 - `MARKETPLACE-INTEGRATION-PLAN.md`: estratégia dos cinco marketplaces.
 - `PHASE-21-ALERT-ENGINE.md` e `PHASE-22-OFFER-REDIRECT.md`: últimas entregas funcionais.
+- `PHASE-23-PRIVACY-ANALYTICS.md`: eventos mínimos e regras de retenção.

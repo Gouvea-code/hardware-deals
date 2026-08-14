@@ -11,12 +11,14 @@ import {AppButton, AppText, ProductCard, Screen} from '../components';
 import {MIN_SEARCH_LENGTH, useProductSearch} from '../hooks/useProductSearch';
 import {RootStackParamList} from '../navigation/types';
 import {colors, spacing, typography} from '../theme';
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {trackEventSafely} from '../services/analyticsService';
 
 type SearchScreenProps = NativeStackScreenProps<RootStackParamList, 'Search'>;
 
 export function SearchScreen({navigation, route}: SearchScreenProps) {
   const [query, setQuery] = useState(route.params?.initialQuery ?? '');
+  const lastTrackedQuery = useRef('');
   const {
     canSearch,
     debouncedQuery,
@@ -31,6 +33,10 @@ export function SearchScreen({navigation, route}: SearchScreenProps) {
   const isLoading = hasMinimumInput && (isDebouncing || isFetching);
   const showEmpty =
     hasMinimumInput && canSearch && !isLoading && !error && products.length === 0;
+
+  useEffect(()=>{if(canSearch&&!isFetching&&!error&&debouncedQuery!==lastTrackedQuery.current){
+    lastTrackedQuery.current=debouncedQuery;trackEventSafely('SEARCH');
+  }},[canSearch,debouncedQuery,error,isFetching]);
 
   return (
     <Screen>
