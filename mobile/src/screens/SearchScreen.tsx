@@ -15,7 +15,7 @@ import {useState} from 'react';
 
 type SearchScreenProps = NativeStackScreenProps<RootStackParamList, 'Search'>;
 
-export function SearchScreen({route}: SearchScreenProps) {
+export function SearchScreen({navigation, route}: SearchScreenProps) {
   const [query, setQuery] = useState(route.params?.initialQuery ?? '');
   const {
     canSearch,
@@ -86,7 +86,14 @@ export function SearchScreen({route}: SearchScreenProps) {
           ItemSeparatorComponent={Separator}
           keyboardShouldPersistTaps="handled"
           keyExtractor={product => product.id}
-          renderItem={({item}) => <ProductCard product={item} />}
+          renderItem={({item}) => (
+            <ProductCard
+              onPress={() =>
+                navigation.navigate('ProductDetails', {productId: item.id})
+              }
+              product={item}
+            />
+          )}
           showsVerticalScrollIndicator={false}
         />
       ) : null}

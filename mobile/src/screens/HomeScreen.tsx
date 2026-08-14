@@ -90,7 +90,15 @@ export function HomeScreen({navigation}: HomeScreenProps) {
               horizontal
               showsHorizontalScrollIndicator={false}>
               {bestDeals.slice(0, 6).map(deal => (
-                <DealCard deal={deal} key={deal.id} />
+                <DealCard
+                  deal={deal}
+                  key={deal.id}
+                  onPress={() =>
+                    navigation.navigate('ProductDetails', {
+                      productId: deal.productId,
+                    })
+                  }
+                />
               ))}
             </ScrollView>
           ) : (
@@ -116,7 +124,16 @@ export function HomeScreen({navigation}: HomeScreenProps) {
           <View style={styles.recentList}>
             {recentDeals.length > 0 ? (
               recentDeals.slice(0, 10).map(deal => (
-                <DealCard compact deal={deal} key={deal.id} />
+                <DealCard
+                  compact
+                  deal={deal}
+                  key={deal.id}
+                  onPress={() =>
+                    navigation.navigate('ProductDetails', {
+                      productId: deal.productId,
+                    })
+                  }
+                />
               ))
             ) : (
               <AppText style={styles.feedback}>Nenhuma oferta recente.</AppText>

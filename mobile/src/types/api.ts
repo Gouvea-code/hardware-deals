@@ -49,3 +49,21 @@ export type Product = {
   ean: string | null;
   imageUrl: string | null;
 };
+
+export type PricePoint = {
+  storeId: string;
+  storeName: string;
+  price: number;
+  collectedAt: string;
+};
+
+export type PriceHistory = {
+  productId: string;
+  currentPrice: number | null;
+  lowestPrice: number | null;
+  highestPrice: number | null;
+  averagePrice: number | null;
+  medianPrice: number | null;
+  priceVariation: number | null;
+  history: PricePoint[];
+};

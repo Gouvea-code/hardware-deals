@@ -1,4 +1,4 @@
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, Pressable, StyleSheet, View} from 'react-native';
 
 import {colors, spacing, typography} from '../theme';
 import {Deal} from '../types/api';
@@ -8,16 +8,23 @@ import {AppText} from './AppText';
 type DealCardProps = {
   deal: Deal;
   compact?: boolean;
+  onPress?: () => void;
 };
 
-export function DealCard({deal, compact = false}: DealCardProps) {
+export function DealCard({deal, compact = false, onPress}: DealCardProps) {
   const hasPreviousPrice =
     deal.originalPrice !== null && deal.originalPrice > deal.price;
 
   return (
-    <View
+    <Pressable
       accessibilityLabel={`${deal.productName}, ${formatCurrency(deal.price)}, loja ${deal.storeName}`}
-      style={[styles.card, compact && styles.compactCard]}>
+      accessibilityRole={onPress ? 'button' : undefined}
+      onPress={onPress}
+      style={({pressed}) => [
+        styles.card,
+        compact && styles.compactCard,
+        pressed && onPress && styles.pressed,
+      ]}>
       {deal.imageUrl ? (
         <Image
           accessibilityLabel={`Imagem de ${deal.productName}`}
@@ -46,7 +53,7 @@ export function DealCard({deal, compact = false}: DealCardProps) {
           <AppText style={styles.score}>Score {deal.score}</AppText>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -94,6 +101,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.sm,
     textDecorationLine: 'line-through',
   },
+  pressed: {opacity: 0.75},
   price: {
     color: colors.primary,
     fontSize: 20,

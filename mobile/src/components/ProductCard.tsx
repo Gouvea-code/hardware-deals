@@ -1,14 +1,16 @@
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, Pressable, StyleSheet, View} from 'react-native';
 
 import {colors, spacing, typography} from '../theme';
 import {Product} from '../types/api';
 import {AppText} from './AppText';
 
-export function ProductCard({product}: {product: Product}) {
+export function ProductCard({product, onPress}: {product: Product; onPress?: () => void}) {
   return (
-    <View
+    <Pressable
       accessibilityLabel={`${product.name}, marca ${product.brand}, categoria ${product.category}`}
-      style={styles.card}>
+      accessibilityRole={onPress ? 'button' : undefined}
+      onPress={onPress}
+      style={({pressed}) => [styles.card, pressed && onPress && styles.pressed]}>
       {product.imageUrl ? (
         <Image
           accessibilityLabel={`Imagem de ${product.name}`}
@@ -30,7 +32,7 @@ export function ProductCard({product}: {product: Product}) {
           <AppText style={styles.categoryText}>{product.category}</AppText>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -81,4 +83,5 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: typography.weights.bold,
   },
+  pressed: {opacity: 0.75},
 });
