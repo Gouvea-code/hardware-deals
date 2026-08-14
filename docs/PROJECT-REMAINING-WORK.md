@@ -4,9 +4,9 @@ Atualizado após a preparação da FASE 36. Este arquivo separa desenvolvimento,
 
 ## 1. Próxima fase recomendada
 
-### FASE 36 — Ativação externa da Play Console
+### Prioridade imediata — API pública e APK beta
 
-Escolher conta pessoal ou de organização, pagar a taxa, verificar identidade e registrar o publicador. Depois, iniciar a FASE 37 — Android Release.
+Provisionar a API em HTTPS, configurar `PUBLIC_API_BASE_URL`, gerar o APK beta, publicar hash SHA-256 e habilitar o download no site. A FASE 36 fica adiada até existir decisão de usar a Play Store.
 
 ## 2. Produto e operação ainda pendentes
 
@@ -129,9 +129,9 @@ Essas fases são evolução e não devem preceder segurança, testes, collectors
 
 ## 8. Ordem prática recomendada
 
-1. Ativar a conta da FASE 36.
-2. Seguir para a FASE 37 — Android Release.
-3. Escolher provedor e domínio para materializar as FASES 30 a 35.
+1. Escolher provedor e materializar staging/API de produção.
+2. Gerar e publicar APK beta funcional.
+3. Seguir para a FASE 41, ignorando tarefas exclusivas da Play Store.
 3. Credenciais e connectors da FASE 47 em paralelo ao staging.
 4. FASE 30–35 com validação Firebase física.
 5. FASE 36–45 para publicação.

@@ -4,8 +4,8 @@ Atualizado em 14/08/2026. O plano principal possui **51 fases numeradas de 00 a 
 
 ## Percentual
 
-- Concluído no repositório: **36 de 51 fases = 70,6%** (FASES 00 a 35).
-- Restante: **15 de 51 fases = 29,4%** (ativação externa da FASE 36 e FASES 37 a 50).
+- Concluído no repositório: **40 de 51 fases = 78,4%** (FASES 00 a 35 e 37 a 40).
+- Restante ou adiado: **11 de 51 fases = 21,6%** (FASE 36 e FASES 41 a 50).
 
 A FASE 36 possui documentação e checklist prontos, mas não entra como concluída enquanto a conta Play Console não for efetivamente criada e verificada. FASES 30 a 32 contam como implementação técnica concluída, embora ambiente, certificado e domínio reais continuem como dependências externas.
 
@@ -14,10 +14,6 @@ A FASE 36 possui documentação e checklist prontos, mas não entra como conclu�
 | Fase | Entrega restante |
 | --- | --- |
 | 36 | Ativar e verificar a conta Google Play Console. |
-| 37 | Definir release Android, versão, assinatura e gerar AAB. |
-| 38 | Confirmar e configurar target API exigida no momento da submissão. |
-| 39 | Preparar Store Listing, textos e metadados. |
-| 40 | Preencher Data Safety conforme o comportamento publicado. |
 | 41 | Auditar e justificar permissões Android. |
 | 42 | Produzir screenshots finais em dispositivos suportados. |
 | 43 | Publicar teste interno e corrigir bloqueios. |

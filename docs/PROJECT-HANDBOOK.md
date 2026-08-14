@@ -18,7 +18,7 @@ Fluxo principal:
 
 ## 2. Estado atual
 
-- Fases 00 a 35 implementadas. A FASE 36 está preparada e depende da ativação externa da conta Play Console. Staging, produção e domínio também aguardam provisionamento.
+- Fases 00 a 35 e 37 a 40 implementadas. A Play Store foi adiada; a distribuição direta aguarda API pública para gerar um APK funcional. Staging, produção e domínio aguardam provisionamento.
 - Backend em Java 21, Spring Boot 3.5 e Maven.
 - Aplicativo Android em React Native 0.87, React 19 e TypeScript.
 - PostgreSQL para persistência, Redis preparado para cache/rate limit e Firebase Cloud Messaging para push.
