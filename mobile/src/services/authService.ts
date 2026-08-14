@@ -5,3 +5,4 @@ export async function forgotPassword(email:string){return(await apiClient.post('
 export async function logout(refreshToken:string){return(await apiClient.post('/auth/logout',{refreshToken})).data;}
 export async function verifyEmail(token:string){return(await apiClient.post('/auth/verify-email',{token})).data;}
 export async function resetPassword(token:string,newPassword:string){return(await apiClient.post('/auth/reset-password',{newPassword,token})).data;}
+export async function deleteAccount(password:string){return(await apiClient.delete('/auth/me',{data:{password}})).data;}

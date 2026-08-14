@@ -27,4 +27,11 @@ class MigrationIntegrityTest {
         String migration = Files.readString(Path.of("src/main/resources/db/migration/V1_3__Create_products_table.sql"));
         assertThat(migration).containsPattern("(?i)ean\\s+VARCHAR\\(50\\)\\s+NOT NULL\\s+UNIQUE");
     }
+
+    @Test
+    void supportedMarketplacesAreSeeded() throws IOException {
+        String migration = Files.readString(Path.of("src/main/resources/db/migration/V1_12__Seed_supported_marketplaces.sql"));
+        assertThat(migration).contains("'mercado-livre'", "'amazon-brasil'", "'kabum'",
+                "'magazine-luiza'", "'shopee'");
+    }
 }
