@@ -2,7 +2,7 @@
 
 Aplicativo Android para encontrar ofertas de hardware, comparar preços históricos, salvar favoritos e receber alertas quando um produto atingir o preço desejado.
 
-Fase atual concluída: **FASE 24 — Administração**.
+Fase atual concluída: **FASE 25 — Testes completos**.
 
 ## Tecnologias
 
@@ -201,6 +201,8 @@ Produção não deve utilizar os valores locais. Consulte `.env.production.examp
 
 - [Manual completo](docs/PROJECT-HANDBOOK.md)
 - [FASE 24 — Administração](docs/PHASE-24-ADMINISTRATION.md)
+- [FASE 25 — Testes completos](docs/PHASE-25-COMPLETE-TESTS.md)
+- [Cronograma de execução e publicação](docs/EXECUTION-ROADMAP.md)
 - [Trabalho restante](docs/PROJECT-REMAINING-WORK.md)
 - [Implantação e publicação](docs/DEPLOYMENT-AND-RELEASE.md)
 - [LGPD e privacidade](docs/LGPD-AND-PRIVACY.md)
