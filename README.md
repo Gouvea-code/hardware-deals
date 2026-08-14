@@ -2,7 +2,7 @@
 
 Aplicativo Android para encontrar ofertas de hardware, comparar preços históricos, salvar favoritos e receber alertas quando um produto atingir o preço desejado.
 
-Fase atual concluída: **FASE 26 — Testes negativos**.
+Fase atual concluída: **FASE 27 — Segurança**.
 
 ## Tecnologias
 
@@ -203,6 +203,7 @@ Produção não deve utilizar os valores locais. Consulte `.env.production.examp
 - [FASE 24 — Administração](docs/PHASE-24-ADMINISTRATION.md)
 - [FASE 25 — Testes completos](docs/PHASE-25-COMPLETE-TESTS.md)
 - [FASE 26 — Testes negativos](docs/PHASE-26-NEGATIVE-TESTS.md)
+- [FASE 27 — Segurança](docs/PHASE-27-SECURITY.md)
 - [Cronograma de execução e publicação](docs/EXECUTION-ROADMAP.md)
 - [Trabalho restante](docs/PROJECT-REMAINING-WORK.md)
 - [Implantação e publicação](docs/DEPLOYMENT-AND-RELEASE.md)

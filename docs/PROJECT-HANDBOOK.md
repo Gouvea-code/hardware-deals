@@ -18,7 +18,7 @@ Fluxo principal:
 
 ## 2. Estado atual
 
-- Fases 00 a 26 implementadas.
+- Fases 00 a 27 implementadas.
 - Backend em Java 21, Spring Boot 3.5 e Maven.
 - Aplicativo Android em React Native 0.87, React 19 e TypeScript.
 - PostgreSQL para persistência, Redis preparado para cache/rate limit e Firebase Cloud Messaging para push.

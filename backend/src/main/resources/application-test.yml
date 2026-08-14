@@ -32,6 +32,7 @@ app:
   auth:
     jwt-secret: test-only-secret-with-at-least-32-bytes-long
     rate-limit-per-minute: 100
+    distributed-rate-limit-enabled: false
 
 management:
   health:

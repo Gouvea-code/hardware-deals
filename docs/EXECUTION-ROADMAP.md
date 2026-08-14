@@ -22,7 +22,7 @@ Prazo esperado para a aplicação básica local: **1 a 2 dias úteis**, principa
 | Semana | Entregas | Dependências externas |
 | --- | --- | --- |
 | 1 | FASE 26 concluída; reparar Docker local e iniciar a FASE 27 de segurança | máquina com Docker |
-| 2 | FASE 27: segurança, rate limit Redis, headers e revisão de secrets | decisão sobre cofre/provedor |
+| 2 | FASE 27 concluída; escolher cofre/provedor e executar revisão externa em staging | decisão sobre cofre/provedor |
 | 3 | FASE 28: paginação, índices, cache e teste de carga | volume de teste |
 | 4 | Consolidar FASE 29 e criar staging da FASE 30 | conta no provedor de nuvem |
 | 5 | Configurar domínio, TLS, SMTP, PostgreSQL, Redis e backups | domínio e credenciais SMTP |
