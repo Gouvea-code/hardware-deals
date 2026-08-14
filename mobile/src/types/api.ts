@@ -77,3 +77,8 @@ export type Favorite = {
   imageUrl: string | null;
   createdAt: string;
 };
+
+export type PriceAlert = {
+  id: string; productId: string; productName: string; brand: string; imageUrl: string | null;
+  targetPrice: number; active: boolean; createdAt: string; updatedAt: string;
+};

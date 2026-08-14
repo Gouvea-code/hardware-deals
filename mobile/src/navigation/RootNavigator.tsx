@@ -3,6 +3,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {HomeScreen} from '../screens/HomeScreen';
 import {FavoritesScreen} from '../screens/FavoritesScreen';
+import {AlertFormScreen} from '../screens/AlertFormScreen';
+import {AlertsScreen} from '../screens/AlertsScreen';
 import {ProductDetailsScreen} from '../screens/ProductDetailsScreen';
 import {SearchScreen} from '../screens/SearchScreen';
 import {colors} from '../theme';
@@ -20,6 +22,8 @@ export function RootNavigator() {
           headerStyle: {backgroundColor: colors.surface},
           headerTintColor: colors.text,
         }}>
+        <Stack.Screen component={AlertFormScreen} name="AlertForm" options={{title: 'Criar alerta'}} />
+        <Stack.Screen component={AlertsScreen} name="Alerts" options={{title: 'Meus alertas'}} />
         <Stack.Screen
           component={FavoritesScreen}
           name="Favorites"

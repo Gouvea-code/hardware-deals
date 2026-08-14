@@ -10,7 +10,7 @@ import {formatCurrency} from '../utils/formatCurrency';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
-export function ProductDetailsScreen({route}: Props) {
+export function ProductDetailsScreen({navigation, route}: Props) {
   const {error, isLoading, offers, priceHistory, product, refresh} =
     useProductDetails(route.params.productId);
   const favorites = useFavorites();
@@ -66,7 +66,9 @@ export function ProductDetailsScreen({route}: Props) {
             label={!favorites.accessToken ? 'Entre para favoritar' : isFavorite ? 'Remover dos favoritos' : 'Favoritar'}
             onPress={() => isFavorite ? favorites.remove(product.id) : favorites.add(product.id)}
           />
-          <AppButton disabled label="Criar alerta (em breve)" onPress={() => undefined} />
+          <AppButton disabled={!favorites.accessToken} label={!favorites.accessToken ? 'Entre para criar alerta' : 'Criar alerta'}
+            onPress={() => navigation.navigate('AlertForm', {productId: product.id, productName: product.name,
+              currentPrice: currentPrice ?? undefined})} />
         </View>
         <AppText style={styles.helper}>
           {!favorites.accessToken
