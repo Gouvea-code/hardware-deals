@@ -1,0 +1,39 @@
+name: Erro no beta interno
+description: Registre uma falha encontrada no APK distribuído diretamente.
+title: "[Beta interno] "
+labels: ["bug", "beta-interno"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Versão ou tag do APK
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Aparelho e versão do Android
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Resultado esperado
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Resultado obtido
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidência sem dados pessoais ou segredos
