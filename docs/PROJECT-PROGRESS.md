@@ -4,31 +4,29 @@ Atualizado em 14/08/2026. O plano principal possui **51 fases numeradas de 00 a 
 
 ## Percentual
 
-- Concluído no repositório: **40 de 51 fases = 78,4%** (FASES 00 a 35 e 37 a 40).
-- Restante ou adiado: **11 de 51 fases = 21,6%** (FASE 36 e FASES 41 a 50).
+- Concluído no repositório: **41 de 51 fases = 80,4%** (FASES 00 a 35 e 37 a 41).
+- Restante ou adiado: **10 de 51 fases = 19,6%** (FASE 36 e FASES 42 a 50).
 
-A FASE 36 possui documentação e checklist prontos, mas não entra como concluída enquanto a conta Play Console não for efetivamente criada e verificada. FASES 30 a 32 contam como implementação técnica concluída, embora ambiente, certificado e domínio reais continuem como dependências externas.
+A FASE 36 foi adiada porque a distribuição atual é por APK, sem Play Store. As FASES 42 a 44 têm automação, roteiro e documentação prontos, mas dependem de API pública, aparelho físico e participantes reais; por isso ainda não são contadas como concluídas.
 
-## O que falta
+## Estado das próximas fases
 
-| Fase | Entrega restante |
-| --- | --- |
-| 36 | Ativar e verificar a conta Google Play Console. |
-| 41 | Auditar e justificar permissões Android. |
-| 42 | Produzir screenshots finais em dispositivos suportados. |
-| 43 | Publicar teste interno e corrigir bloqueios. |
-| 44 | Executar teste fechado e cumprir participantes/prazo exigidos. |
-| 45 | Solicitar e realizar rollout gradual em produção. |
-| 46 | Operar monitoramento, incidentes, feedback e atualizações pós-lançamento. |
-| 47 | Ativar collectors oficiais/autorizados dos marketplaces. |
-| 48 | Calibrar qualidade das promoções com dados reais. |
-| 49 | Implementar reports enviados pelos usuários. |
-| 50 | Avaliar monetização somente após métricas e conformidade. |
+| Fase | Estado | Entrega restante |
+|---|---|---|
+| 36 | Adiada | Play Console, somente se a estratégia mudar. |
+| 41 | Concluída | Permissões mínimas auditadas e testadas. |
+| 42 | Preparada | Gerar e validar seis screenshots reais com API pública. |
+| 43 | Preparada | Executar roteiro interno em aparelho físico e corrigir bloqueios. |
+| 44 | Preparada | Executar beta fechado direto e documentar resultados. |
+| 45 | Adaptar | Fazer rollout gradual do APK fora da Play Store. |
+| 46 | Pendente | Operar monitoramento, incidentes, feedback e atualizações. |
+| 47 | Parcial | Conectores implementados; obter credenciais/contratos e ativar preços reais. |
+| 48 | Pendente | Calibrar promoções com dados reais. |
+| 49 | Pendente | Implementar denúncias enviadas por usuários. |
+| 50 | Pendente | Avaliar monetização após métricas e conformidade. |
 
-## Dependências transversais
+## Pendência imediata
 
-- Registrar domínio e publicar site/política em HTTPS.
-- Provisionar staging e produção com segredos, SMTP, banco, Redis, backup e alertas.
-- Configurar Firebase real e validar push em dispositivo físico.
-- Obter autorização/credenciais oficiais dos marketplaces.
-- Concluir revisão jurídica LGPD, controlador, operadores e canal de atendimento.
+Provisionar uma API HTTPS pública com PostgreSQL e Redis, configurar SMTP/Firebase e apontar `public-site/config.js` e o APK para essa URL. O código de produção já existe, mas criar o serviço requer uma conta de hospedagem, domínio/URL e segredos que não devem ser inventados nem enviados ao Git.
+
+Em paralelo, o proprietário precisa obter acesso autorizado de Mercado Livre, Amazon Brasil, KaBuM! e Magazine Luiza. Sem contratos/credenciais válidos, nenhuma implementação pode legalmente produzir a lista real de preços; scraping permanece proibido.
