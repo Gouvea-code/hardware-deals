@@ -4,6 +4,7 @@ Aplicativo Android para encontrar ofertas de hardware, comparar preços históri
 
 - [Site público](https://gouvea-code.github.io/hardware-deals/)
 - [Download da beta técnica](https://gouvea-code.github.io/hardware-deals/download/)
+- [Publicar a API gratuitamente](docs/PUBLIC-API-DEPLOYMENT.md)
 
 Fases concluídas no repositório: **00 a 35 e 37 a 40**. A FASE 36 foi adiada porque a distribuição será direta, fora da Play Store.
 
@@ -225,6 +226,7 @@ Produção não deve utilizar os valores locais. Consulte `.env.production.examp
 - [Implantação e publicação](docs/DEPLOYMENT-AND-RELEASE.md)
 - [LGPD e privacidade](docs/LGPD-AND-PRIVACY.md)
 - [Plano dos marketplaces](docs/MARKETPLACE-INTEGRATION-PLAN.md)
+- [API pública gratuita: Koyeb + Neon + Upstash](docs/PUBLIC-API-DEPLOYMENT.md)
 
 ## Segurança
 

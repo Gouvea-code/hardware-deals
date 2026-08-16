@@ -1,0 +1,7 @@
+docs/**
+mobile/**
+public-site/**
+performance/**
+ops/**
+*.md
+docker-compose*.yml
